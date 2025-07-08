@@ -1,0 +1,10 @@
+[project]
+name = "tractian-open-api"
+version = "0.1.0"
+description = "Generated open api client."
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "black>=25.1.0",
+    "openapi-python-client>=0.25.2",
+]
