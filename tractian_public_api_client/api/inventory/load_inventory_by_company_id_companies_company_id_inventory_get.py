@@ -59,11 +59,17 @@ def _build_response(
 def sync_detailed(
     company_id: str,
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
     page: Union[Unset, int] = 1,
     limit: Union[Unset, int] = 10,
 ) -> Response[HTTPValidationError]:
     """Load Inventory By Company Id
+
+     **If your company already use Supply Module you must use the Supply routes.**
+
+    Please use the new `GET /supply/companies/{company_id}/inventory` endpoint instead.
+
+    This endpoint loads inventory items by company ID with pagination support.
 
     Args:
         company_id (str): company id
@@ -94,11 +100,17 @@ def sync_detailed(
 def sync(
     company_id: str,
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
     page: Union[Unset, int] = 1,
     limit: Union[Unset, int] = 10,
 ) -> Optional[HTTPValidationError]:
     """Load Inventory By Company Id
+
+     **If your company already use Supply Module you must use the Supply routes.**
+
+    Please use the new `GET /supply/companies/{company_id}/inventory` endpoint instead.
+
+    This endpoint loads inventory items by company ID with pagination support.
 
     Args:
         company_id (str): company id
@@ -124,11 +136,17 @@ def sync(
 async def asyncio_detailed(
     company_id: str,
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
     page: Union[Unset, int] = 1,
     limit: Union[Unset, int] = 10,
 ) -> Response[HTTPValidationError]:
     """Load Inventory By Company Id
+
+     **If your company already use Supply Module you must use the Supply routes.**
+
+    Please use the new `GET /supply/companies/{company_id}/inventory` endpoint instead.
+
+    This endpoint loads inventory items by company ID with pagination support.
 
     Args:
         company_id (str): company id
@@ -157,11 +175,17 @@ async def asyncio_detailed(
 async def asyncio(
     company_id: str,
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
     page: Union[Unset, int] = 1,
     limit: Union[Unset, int] = 10,
 ) -> Optional[HTTPValidationError]:
     """Load Inventory By Company Id
+
+     **If your company already use Supply Module you must use the Supply routes.**
+
+    Please use the new `GET /supply/companies/{company_id}/inventory` endpoint instead.
+
+    This endpoint loads inventory items by company ID with pagination support.
 
     Args:
         company_id (str): company id

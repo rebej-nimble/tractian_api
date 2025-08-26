@@ -47,7 +47,7 @@ def _build_response(
 def sync_detailed(
     item_id: str,
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
 ) -> Response[HTTPValidationError]:
     """Load Item By Id
 
@@ -78,7 +78,7 @@ def sync_detailed(
 def sync(
     item_id: str,
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
 ) -> Optional[HTTPValidationError]:
     """Load Item By Id
 
@@ -104,7 +104,7 @@ def sync(
 async def asyncio_detailed(
     item_id: str,
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
 ) -> Response[HTTPValidationError]:
     """Load Item By Id
 
@@ -133,7 +133,7 @@ async def asyncio_detailed(
 async def asyncio(
     item_id: str,
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
 ) -> Optional[HTTPValidationError]:
     """Load Item By Id
 

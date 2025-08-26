@@ -15,10 +15,8 @@ def _get_kwargs(
     reservation_id: str,
     *,
     body: ItemReservationUpdateAPI,
-    company_id: str,
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
-    headers["company-id"] = company_id
 
     _kwargs: dict[str, Any] = {
         "method": "put",
@@ -64,15 +62,17 @@ def _build_response(
 def sync_detailed(
     reservation_id: str,
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
     body: ItemReservationUpdateAPI,
-    company_id: str,
 ) -> Response[Union[HTTPValidationError, ItemReservationMotor]]:
     """Update Item Reservations By Id
 
+     **If your company already use Supply Module you must use the Supply routes.**
+
+    This endpoint updates an existing item reservation.
+
     Args:
         reservation_id (str):
-        company_id (str):
         body (ItemReservationUpdateAPI):
 
     Raises:
@@ -86,7 +86,6 @@ def sync_detailed(
     kwargs = _get_kwargs(
         reservation_id=reservation_id,
         body=body,
-        company_id=company_id,
     )
 
     response = client.get_httpx_client().request(
@@ -99,15 +98,17 @@ def sync_detailed(
 def sync(
     reservation_id: str,
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
     body: ItemReservationUpdateAPI,
-    company_id: str,
 ) -> Optional[Union[HTTPValidationError, ItemReservationMotor]]:
     """Update Item Reservations By Id
 
+     **If your company already use Supply Module you must use the Supply routes.**
+
+    This endpoint updates an existing item reservation.
+
     Args:
         reservation_id (str):
-        company_id (str):
         body (ItemReservationUpdateAPI):
 
     Raises:
@@ -122,22 +123,23 @@ def sync(
         reservation_id=reservation_id,
         client=client,
         body=body,
-        company_id=company_id,
     ).parsed
 
 
 async def asyncio_detailed(
     reservation_id: str,
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
     body: ItemReservationUpdateAPI,
-    company_id: str,
 ) -> Response[Union[HTTPValidationError, ItemReservationMotor]]:
     """Update Item Reservations By Id
 
+     **If your company already use Supply Module you must use the Supply routes.**
+
+    This endpoint updates an existing item reservation.
+
     Args:
         reservation_id (str):
-        company_id (str):
         body (ItemReservationUpdateAPI):
 
     Raises:
@@ -151,7 +153,6 @@ async def asyncio_detailed(
     kwargs = _get_kwargs(
         reservation_id=reservation_id,
         body=body,
-        company_id=company_id,
     )
 
     response = await client.get_async_httpx_client().request(**kwargs)
@@ -162,15 +163,17 @@ async def asyncio_detailed(
 async def asyncio(
     reservation_id: str,
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
     body: ItemReservationUpdateAPI,
-    company_id: str,
 ) -> Optional[Union[HTTPValidationError, ItemReservationMotor]]:
     """Update Item Reservations By Id
 
+     **If your company already use Supply Module you must use the Supply routes.**
+
+    This endpoint updates an existing item reservation.
+
     Args:
         reservation_id (str):
-        company_id (str):
         body (ItemReservationUpdateAPI):
 
     Raises:
@@ -186,6 +189,5 @@ async def asyncio(
             reservation_id=reservation_id,
             client=client,
             body=body,
-            company_id=company_id,
         )
     ).parsed

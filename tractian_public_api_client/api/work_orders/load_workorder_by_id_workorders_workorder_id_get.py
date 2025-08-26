@@ -55,7 +55,7 @@ def _build_response(
 def sync_detailed(
     workorder_id: str,
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
 ) -> Response[Union[Any, HTTPValidationError, WorkOrdersMotor]]:
     """Load a work order by ID
 
@@ -86,7 +86,7 @@ def sync_detailed(
 def sync(
     workorder_id: str,
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
 ) -> Optional[Union[Any, HTTPValidationError, WorkOrdersMotor]]:
     """Load a work order by ID
 
@@ -112,7 +112,7 @@ def sync(
 async def asyncio_detailed(
     workorder_id: str,
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
 ) -> Response[Union[Any, HTTPValidationError, WorkOrdersMotor]]:
     """Load a work order by ID
 
@@ -141,7 +141,7 @@ async def asyncio_detailed(
 async def asyncio(
     workorder_id: str,
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
 ) -> Optional[Union[Any, HTTPValidationError, WorkOrdersMotor]]:
     """Load a work order by ID
 

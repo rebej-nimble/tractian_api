@@ -63,7 +63,7 @@ def _build_response(
 def sync_detailed(
     event_id: str,
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
     body: CommentsMotor,
 ) -> Response[Union[Any, HTTPValidationError]]:
     """Add comment to event
@@ -97,7 +97,7 @@ def sync_detailed(
 def sync(
     event_id: str,
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
     body: CommentsMotor,
 ) -> Optional[Union[Any, HTTPValidationError]]:
     """Add comment to event
@@ -126,7 +126,7 @@ def sync(
 async def asyncio_detailed(
     event_id: str,
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
     body: CommentsMotor,
 ) -> Response[Union[Any, HTTPValidationError]]:
     """Add comment to event
@@ -158,7 +158,7 @@ async def asyncio_detailed(
 async def asyncio(
     event_id: str,
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
     body: CommentsMotor,
 ) -> Optional[Union[Any, HTTPValidationError]]:
     """Add comment to event

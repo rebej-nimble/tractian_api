@@ -10,10 +10,15 @@ T = TypeVar("T", bound="InboundBatch")
 @_attrs_define
 class InboundBatch:
     item_storage_id: str
+    """ Item storage id. """
     inbound_batch_id: str
+    """ Inbound batch id. """
     quantity: float
+    """ Quantity. """
     inbound_batch_name: str
+    """ Inbound batch name. """
     inbound_batch_unit_price: float
+    """ Inbound batch unit price. """
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:

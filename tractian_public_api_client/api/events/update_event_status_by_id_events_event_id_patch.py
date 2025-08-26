@@ -5,7 +5,7 @@ import httpx
 
 from ... import errors
 from ...client import AuthenticatedClient, Client
-from ...models.event_cerberus import EventCerberus
+from ...models.api_reliability_event_response import ApiReliabilityEventResponse
 from ...models.http_validation_error import HTTPValidationError
 from ...models.update_events_tractian_request import UpdateEventsTractianRequest
 from ...types import Response
@@ -16,12 +16,9 @@ def _get_kwargs(
     *,
     body: UpdateEventsTractianRequest,
     user_id: str,
-    company_id: str,
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
     headers["user-id"] = user_id
-
-    headers["company-id"] = company_id
 
     _kwargs: dict[str, Any] = {
         "method": "patch",
@@ -38,9 +35,9 @@ def _get_kwargs(
 
 def _parse_response(
     *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[Union[Any, EventCerberus, HTTPValidationError]]:
+) -> Optional[Union[Any, ApiReliabilityEventResponse, HTTPValidationError]]:
     if response.status_code == 200:
-        response_200 = EventCerberus.from_dict(response.json())
+        response_200 = ApiReliabilityEventResponse.from_dict(response.json())
 
         return response_200
     if response.status_code == 404:
@@ -61,7 +58,7 @@ def _parse_response(
 
 def _build_response(
     *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Response[Union[Any, EventCerberus, HTTPValidationError]]:
+) -> Response[Union[Any, ApiReliabilityEventResponse, HTTPValidationError]]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -73,11 +70,10 @@ def _build_response(
 def sync_detailed(
     event_id: str,
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
     body: UpdateEventsTractianRequest,
     user_id: str,
-    company_id: str,
-) -> Response[Union[Any, EventCerberus, HTTPValidationError]]:
+) -> Response[Union[Any, ApiReliabilityEventResponse, HTTPValidationError]]:
     """Update an event status
 
      Updates the fix status of an existing event. The status can be set to either fixed or not fixed.
@@ -85,7 +81,6 @@ def sync_detailed(
     Args:
         event_id (str):
         user_id (str):
-        company_id (str):
         body (UpdateEventsTractianRequest):
 
     Raises:
@@ -93,14 +88,13 @@ def sync_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[Any, EventCerberus, HTTPValidationError]]
+        Response[Union[Any, ApiReliabilityEventResponse, HTTPValidationError]]
     """
 
     kwargs = _get_kwargs(
         event_id=event_id,
         body=body,
         user_id=user_id,
-        company_id=company_id,
     )
 
     response = client.get_httpx_client().request(
@@ -113,11 +107,10 @@ def sync_detailed(
 def sync(
     event_id: str,
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
     body: UpdateEventsTractianRequest,
     user_id: str,
-    company_id: str,
-) -> Optional[Union[Any, EventCerberus, HTTPValidationError]]:
+) -> Optional[Union[Any, ApiReliabilityEventResponse, HTTPValidationError]]:
     """Update an event status
 
      Updates the fix status of an existing event. The status can be set to either fixed or not fixed.
@@ -125,7 +118,6 @@ def sync(
     Args:
         event_id (str):
         user_id (str):
-        company_id (str):
         body (UpdateEventsTractianRequest):
 
     Raises:
@@ -133,7 +125,7 @@ def sync(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[Any, EventCerberus, HTTPValidationError]
+        Union[Any, ApiReliabilityEventResponse, HTTPValidationError]
     """
 
     return sync_detailed(
@@ -141,18 +133,16 @@ def sync(
         client=client,
         body=body,
         user_id=user_id,
-        company_id=company_id,
     ).parsed
 
 
 async def asyncio_detailed(
     event_id: str,
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
     body: UpdateEventsTractianRequest,
     user_id: str,
-    company_id: str,
-) -> Response[Union[Any, EventCerberus, HTTPValidationError]]:
+) -> Response[Union[Any, ApiReliabilityEventResponse, HTTPValidationError]]:
     """Update an event status
 
      Updates the fix status of an existing event. The status can be set to either fixed or not fixed.
@@ -160,7 +150,6 @@ async def asyncio_detailed(
     Args:
         event_id (str):
         user_id (str):
-        company_id (str):
         body (UpdateEventsTractianRequest):
 
     Raises:
@@ -168,14 +157,13 @@ async def asyncio_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[Any, EventCerberus, HTTPValidationError]]
+        Response[Union[Any, ApiReliabilityEventResponse, HTTPValidationError]]
     """
 
     kwargs = _get_kwargs(
         event_id=event_id,
         body=body,
         user_id=user_id,
-        company_id=company_id,
     )
 
     response = await client.get_async_httpx_client().request(**kwargs)
@@ -186,11 +174,10 @@ async def asyncio_detailed(
 async def asyncio(
     event_id: str,
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
     body: UpdateEventsTractianRequest,
     user_id: str,
-    company_id: str,
-) -> Optional[Union[Any, EventCerberus, HTTPValidationError]]:
+) -> Optional[Union[Any, ApiReliabilityEventResponse, HTTPValidationError]]:
     """Update an event status
 
      Updates the fix status of an existing event. The status can be set to either fixed or not fixed.
@@ -198,7 +185,6 @@ async def asyncio(
     Args:
         event_id (str):
         user_id (str):
-        company_id (str):
         body (UpdateEventsTractianRequest):
 
     Raises:
@@ -206,7 +192,7 @@ async def asyncio(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[Any, EventCerberus, HTTPValidationError]
+        Union[Any, ApiReliabilityEventResponse, HTTPValidationError]
     """
 
     return (
@@ -215,6 +201,5 @@ async def asyncio(
             client=client,
             body=body,
             user_id=user_id,
-            company_id=company_id,
         )
     ).parsed

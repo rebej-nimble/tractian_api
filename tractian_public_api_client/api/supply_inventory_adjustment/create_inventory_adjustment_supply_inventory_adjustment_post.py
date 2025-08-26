@@ -60,7 +60,7 @@ def _build_response(
 
 def sync_detailed(
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
     body: ApiSupplyInventoryAdjustmentRequest,
 ) -> Response[Union[Any, HTTPValidationError]]:
     """Create Inventory Adjustment
@@ -89,7 +89,7 @@ def sync_detailed(
 
 def sync(
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
     body: ApiSupplyInventoryAdjustmentRequest,
 ) -> Optional[Union[Any, HTTPValidationError]]:
     """Create Inventory Adjustment
@@ -113,7 +113,7 @@ def sync(
 
 async def asyncio_detailed(
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
     body: ApiSupplyInventoryAdjustmentRequest,
 ) -> Response[Union[Any, HTTPValidationError]]:
     """Create Inventory Adjustment
@@ -140,7 +140,7 @@ async def asyncio_detailed(
 
 async def asyncio(
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
     body: ApiSupplyInventoryAdjustmentRequest,
 ) -> Optional[Union[Any, HTTPValidationError]]:
     """Create Inventory Adjustment

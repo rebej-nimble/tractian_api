@@ -5,7 +5,9 @@ from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 if TYPE_CHECKING:
-    from ..models.yes_or_no_custom import YesOrNoCustom
+    from ..models.inspection_procedure_option_value import (
+        InspectionProcedureOptionValue,
+    )
 
 
 T = TypeVar("T", bound="UpdateInspectionProcedureTractianRequest")
@@ -13,17 +15,19 @@ T = TypeVar("T", bound="UpdateInspectionProcedureTractianRequest")
 
 @_attrs_define
 class UpdateInspectionProcedureTractianRequest:
-    value: Union["YesOrNoCustom", None, bool, list[int], str]
+    value: Union["InspectionProcedureOptionValue", None, bool, list[int], str]
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        from ..models.yes_or_no_custom import YesOrNoCustom
+        from ..models.inspection_procedure_option_value import (
+            InspectionProcedureOptionValue,
+        )
 
         value: Union[None, bool, dict[str, Any], list[int], str]
         if isinstance(self.value, list):
             value = self.value
 
-        elif isinstance(self.value, YesOrNoCustom):
+        elif isinstance(self.value, InspectionProcedureOptionValue):
             value = self.value.to_dict()
         else:
             value = self.value
@@ -40,13 +44,15 @@ class UpdateInspectionProcedureTractianRequest:
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.yes_or_no_custom import YesOrNoCustom
+        from ..models.inspection_procedure_option_value import (
+            InspectionProcedureOptionValue,
+        )
 
         d = dict(src_dict)
 
         def _parse_value(
             data: object,
-        ) -> Union["YesOrNoCustom", None, bool, list[int], str]:
+        ) -> Union["InspectionProcedureOptionValue", None, bool, list[int], str]:
             if data is None:
                 return data
             try:
@@ -60,12 +66,15 @@ class UpdateInspectionProcedureTractianRequest:
             try:
                 if not isinstance(data, dict):
                     raise TypeError()
-                value_type_1 = YesOrNoCustom.from_dict(data)
+                value_type_1 = InspectionProcedureOptionValue.from_dict(data)
 
                 return value_type_1
             except:  # noqa: E722
                 pass
-            return cast(Union["YesOrNoCustom", None, bool, list[int], str], data)
+            return cast(
+                Union["InspectionProcedureOptionValue", None, bool, list[int], str],
+                data,
+            )
 
         value = _parse_value(d.pop("value"))
 

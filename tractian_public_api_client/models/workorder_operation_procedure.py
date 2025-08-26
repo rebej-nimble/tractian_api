@@ -7,12 +7,9 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
-    from ..models.checklist import Checklist
-    from ..models.heading import Heading
-    from ..models.inspection_custom import InspectionCustom
-    from ..models.inspection_list import InspectionList
-    from ..models.metrics import Metrics
-    from ..models.yes_no_custom import YesNoCustom
+    from ..models.workorder_operation_procedure_field import (
+        WorkorderOperationProcedureField,
+    )
 
 
 T = TypeVar("T", bound="WorkorderOperationProcedure")
@@ -22,46 +19,18 @@ T = TypeVar("T", bound="WorkorderOperationProcedure")
 class WorkorderOperationProcedure:
     id: str
     title: str
-    fields: list[
-        Union[
-            "Checklist",
-            "Heading",
-            "InspectionCustom",
-            "InspectionList",
-            "Metrics",
-            "YesNoCustom",
-        ]
-    ]
+    fields: list["WorkorderOperationProcedureField"]
     procedure_id: Union[None, Unset, str] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        from ..models.checklist import Checklist
-        from ..models.heading import Heading
-        from ..models.inspection_custom import InspectionCustom
-        from ..models.metrics import Metrics
-        from ..models.yes_no_custom import YesNoCustom
-
         id = self.id
 
         title = self.title
 
         fields = []
         for fields_item_data in self.fields:
-            fields_item: dict[str, Any]
-            if isinstance(fields_item_data, Heading):
-                fields_item = fields_item_data.to_dict()
-            elif isinstance(fields_item_data, Metrics):
-                fields_item = fields_item_data.to_dict()
-            elif isinstance(fields_item_data, InspectionCustom):
-                fields_item = fields_item_data.to_dict()
-            elif isinstance(fields_item_data, Checklist):
-                fields_item = fields_item_data.to_dict()
-            elif isinstance(fields_item_data, YesNoCustom):
-                fields_item = fields_item_data.to_dict()
-            else:
-                fields_item = fields_item_data.to_dict()
-
+            fields_item = fields_item_data.to_dict()
             fields.append(fields_item)
 
         procedure_id: Union[None, Unset, str]
@@ -86,12 +55,9 @@ class WorkorderOperationProcedure:
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.checklist import Checklist
-        from ..models.heading import Heading
-        from ..models.inspection_custom import InspectionCustom
-        from ..models.inspection_list import InspectionList
-        from ..models.metrics import Metrics
-        from ..models.yes_no_custom import YesNoCustom
+        from ..models.workorder_operation_procedure_field import (
+            WorkorderOperationProcedureField,
+        )
 
         d = dict(src_dict)
         id = d.pop("id")
@@ -101,64 +67,7 @@ class WorkorderOperationProcedure:
         fields = []
         _fields = d.pop("fields")
         for fields_item_data in _fields:
-
-            def _parse_fields_item(
-                data: object,
-            ) -> Union[
-                "Checklist",
-                "Heading",
-                "InspectionCustom",
-                "InspectionList",
-                "Metrics",
-                "YesNoCustom",
-            ]:
-                try:
-                    if not isinstance(data, dict):
-                        raise TypeError()
-                    fields_item_type_0 = Heading.from_dict(data)
-
-                    return fields_item_type_0
-                except:  # noqa: E722
-                    pass
-                try:
-                    if not isinstance(data, dict):
-                        raise TypeError()
-                    fields_item_type_1 = Metrics.from_dict(data)
-
-                    return fields_item_type_1
-                except:  # noqa: E722
-                    pass
-                try:
-                    if not isinstance(data, dict):
-                        raise TypeError()
-                    fields_item_type_2 = InspectionCustom.from_dict(data)
-
-                    return fields_item_type_2
-                except:  # noqa: E722
-                    pass
-                try:
-                    if not isinstance(data, dict):
-                        raise TypeError()
-                    fields_item_type_3 = Checklist.from_dict(data)
-
-                    return fields_item_type_3
-                except:  # noqa: E722
-                    pass
-                try:
-                    if not isinstance(data, dict):
-                        raise TypeError()
-                    fields_item_type_4 = YesNoCustom.from_dict(data)
-
-                    return fields_item_type_4
-                except:  # noqa: E722
-                    pass
-                if not isinstance(data, dict):
-                    raise TypeError()
-                fields_item_type_5 = InspectionList.from_dict(data)
-
-                return fields_item_type_5
-
-            fields_item = _parse_fields_item(fields_item_data)
+            fields_item = WorkorderOperationProcedureField.from_dict(fields_item_data)
 
             fields.append(fields_item)
 

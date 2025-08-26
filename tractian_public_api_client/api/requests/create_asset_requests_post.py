@@ -63,7 +63,7 @@ def _build_response(
 
 def sync_detailed(
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
     body: Request,
 ) -> Response[Union[Any, HTTPValidationError, RequestsMotor]]:
     """Create a request
@@ -94,7 +94,7 @@ def sync_detailed(
 
 def sync(
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
     body: Request,
 ) -> Optional[Union[Any, HTTPValidationError, RequestsMotor]]:
     """Create a request
@@ -120,7 +120,7 @@ def sync(
 
 async def asyncio_detailed(
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
     body: Request,
 ) -> Response[Union[Any, HTTPValidationError, RequestsMotor]]:
     """Create a request
@@ -149,7 +149,7 @@ async def asyncio_detailed(
 
 async def asyncio(
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
     body: Request,
 ) -> Optional[Union[Any, HTTPValidationError, RequestsMotor]]:
     """Create a request

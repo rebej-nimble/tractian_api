@@ -11,16 +11,20 @@ T = TypeVar("T", bound="UpdateEventsTractianRequest")
 
 @_attrs_define
 class UpdateEventsTractianRequest:
+    company_id: str
     fix_status: FixStatus
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
+        company_id = self.company_id
+
         fix_status: str = self.fix_status
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update(
             {
+                "companyId": company_id,
                 "fixStatus": fix_status,
             }
         )
@@ -30,9 +34,12 @@ class UpdateEventsTractianRequest:
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
+        company_id = d.pop("companyId")
+
         fix_status = check_fix_status(d.pop("fixStatus"))
 
         update_events_tractian_request = cls(
+            company_id=company_id,
             fix_status=fix_status,
         )
 

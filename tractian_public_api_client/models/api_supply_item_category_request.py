@@ -15,12 +15,13 @@ T = TypeVar("T", bound="ApiSupplyItemCategoryRequest")
 
 @_attrs_define
 class ApiSupplyItemCategoryRequest:
-    name: str
+    name: Union[None, Unset, str] = UNSET
     """ The name of the item category """
-    company_id: str
+    company_id: Union[None, Unset, str] = UNSET
     """ The id of the company """
-    type_: ItemCategoryTypeEnum
-    color: Union[None, Unset, str] = "#FC259C"
+    type_: Union[ItemCategoryTypeEnum, None, Unset] = UNSET
+    """ The type of the item category """
+    color: Union[None, Unset, str] = "#972D35"
     """ The color of the item category. if not provided, a random color will be generated """
     description: Union[None, Unset, str] = UNSET
     """ The description of the item category """
@@ -35,11 +36,25 @@ class ApiSupplyItemCategoryRequest:
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        name = self.name
+        name: Union[None, Unset, str]
+        if isinstance(self.name, Unset):
+            name = UNSET
+        else:
+            name = self.name
 
-        company_id = self.company_id
+        company_id: Union[None, Unset, str]
+        if isinstance(self.company_id, Unset):
+            company_id = UNSET
+        else:
+            company_id = self.company_id
 
-        type_: str = self.type_
+        type_: Union[None, Unset, str]
+        if isinstance(self.type_, Unset):
+            type_ = UNSET
+        elif isinstance(self.type_, str):
+            type_ = self.type_
+        else:
+            type_ = self.type_
 
         color: Union[None, Unset, str]
         if isinstance(self.color, Unset):
@@ -79,13 +94,13 @@ class ApiSupplyItemCategoryRequest:
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update(
-            {
-                "name": name,
-                "companyId": company_id,
-                "type": type_,
-            }
-        )
+        field_dict.update({})
+        if name is not UNSET:
+            field_dict["name"] = name
+        if company_id is not UNSET:
+            field_dict["companyId"] = company_id
+        if type_ is not UNSET:
+            field_dict["type"] = type_
         if color is not UNSET:
             field_dict["color"] = color
         if description is not UNSET:
@@ -104,11 +119,41 @@ class ApiSupplyItemCategoryRequest:
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
-        name = d.pop("name")
 
-        company_id = d.pop("companyId")
+        def _parse_name(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
 
-        type_ = check_item_category_type_enum(d.pop("type"))
+        name = _parse_name(d.pop("name", UNSET))
+
+        def _parse_company_id(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        company_id = _parse_company_id(d.pop("companyId", UNSET))
+
+        def _parse_type_(data: object) -> Union[ItemCategoryTypeEnum, None, Unset]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, str):
+                    raise TypeError()
+                type_type_0 = check_item_category_type_enum(data)
+
+                return type_type_0
+            except:  # noqa: E722
+                pass
+            return cast(Union[ItemCategoryTypeEnum, None, Unset], data)
+
+        type_ = _parse_type_(d.pop("type", UNSET))
 
         def _parse_color(data: object) -> Union[None, Unset, str]:
             if data is None:

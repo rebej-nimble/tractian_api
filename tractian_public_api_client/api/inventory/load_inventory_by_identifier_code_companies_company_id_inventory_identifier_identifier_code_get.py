@@ -54,9 +54,15 @@ def sync_detailed(
     company_id: str,
     identifier_code: str,
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
 ) -> Response[Union[HTTPValidationError, InventoryMongoDB]]:
     """Load Inventory By Identifier Code
+
+     **If your company already use Supply Module you must use the Supply routes.**
+
+    Use `GET /supply/companies/{company_id}/inventory` with filters instead.
+
+    This endpoint loads an inventory item by its identifier code.
 
     Args:
         company_id (str):
@@ -86,9 +92,15 @@ def sync(
     company_id: str,
     identifier_code: str,
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
 ) -> Optional[Union[HTTPValidationError, InventoryMongoDB]]:
     """Load Inventory By Identifier Code
+
+     **If your company already use Supply Module you must use the Supply routes.**
+
+    Use `GET /supply/companies/{company_id}/inventory` with filters instead.
+
+    This endpoint loads an inventory item by its identifier code.
 
     Args:
         company_id (str):
@@ -113,9 +125,15 @@ async def asyncio_detailed(
     company_id: str,
     identifier_code: str,
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
 ) -> Response[Union[HTTPValidationError, InventoryMongoDB]]:
     """Load Inventory By Identifier Code
+
+     **If your company already use Supply Module you must use the Supply routes.**
+
+    Use `GET /supply/companies/{company_id}/inventory` with filters instead.
+
+    This endpoint loads an inventory item by its identifier code.
 
     Args:
         company_id (str):
@@ -143,9 +161,15 @@ async def asyncio(
     company_id: str,
     identifier_code: str,
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
 ) -> Optional[Union[HTTPValidationError, InventoryMongoDB]]:
     """Load Inventory By Identifier Code
+
+     **If your company already use Supply Module you must use the Supply routes.**
+
+    Use `GET /supply/companies/{company_id}/inventory` with filters instead.
+
+    This endpoint loads an inventory item by its identifier code.
 
     Args:
         company_id (str):

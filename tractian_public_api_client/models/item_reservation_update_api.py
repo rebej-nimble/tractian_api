@@ -16,6 +16,8 @@ T = TypeVar("T", bound="ItemReservationUpdateAPI")
 
 @_attrs_define
 class ItemReservationUpdateAPI:
+    company_id: str
+    """ Unique identifier of the company. """
     quantity: float
     """ Total quantity of the item to be reserved. """
     selected_batches: Union[None, list["ItemReservationRequestSelectedBatchesAPI"]]
@@ -25,6 +27,8 @@ class ItemReservationUpdateAPI:
     code for the reservation. """
 
     def to_dict(self) -> dict[str, Any]:
+        company_id = self.company_id
+
         quantity = self.quantity
 
         selected_batches: Union[None, list[dict[str, Any]]]
@@ -49,6 +53,7 @@ class ItemReservationUpdateAPI:
 
         field_dict.update(
             {
+                "companyId": company_id,
                 "quantity": quantity,
                 "selectedBatches": selected_batches,
             }
@@ -65,6 +70,8 @@ class ItemReservationUpdateAPI:
         )
 
         d = dict(src_dict)
+        company_id = d.pop("companyId")
+
         quantity = d.pop("quantity")
 
         def _parse_selected_batches(
@@ -105,6 +112,7 @@ class ItemReservationUpdateAPI:
         identifier_code = _parse_identifier_code(d.pop("identifierCode", UNSET))
 
         item_reservation_update_api = cls(
+            company_id=company_id,
             quantity=quantity,
             selected_batches=selected_batches,
             identifier_code=identifier_code,

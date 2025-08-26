@@ -83,7 +83,7 @@ def _build_response(
 def sync_detailed(
     company_id: str,
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
     page: Union[Unset, int] = 1,
     limit: Union[Unset, int] = 10,
     deleted: Union[None, Unset, bool] = UNSET,
@@ -129,7 +129,7 @@ def sync_detailed(
 def sync(
     company_id: str,
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
     page: Union[Unset, int] = 1,
     limit: Union[Unset, int] = 10,
     deleted: Union[None, Unset, bool] = UNSET,
@@ -170,7 +170,7 @@ def sync(
 async def asyncio_detailed(
     company_id: str,
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
     page: Union[Unset, int] = 1,
     limit: Union[Unset, int] = 10,
     deleted: Union[None, Unset, bool] = UNSET,
@@ -214,7 +214,7 @@ async def asyncio_detailed(
 async def asyncio(
     company_id: str,
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
     page: Union[Unset, int] = 1,
     limit: Union[Unset, int] = 10,
     deleted: Union[None, Unset, bool] = UNSET,

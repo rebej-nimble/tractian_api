@@ -67,7 +67,7 @@ def _build_response(
 def sync_detailed(
     inspection_id: str,
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
     body: UpdateInspectionStatusTractianRequest,
 ) -> Response[Union[Any, HTTPValidationError, InspectionMotor]]:
     """Update inspection status
@@ -102,7 +102,7 @@ def sync_detailed(
 def sync(
     inspection_id: str,
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
     body: UpdateInspectionStatusTractianRequest,
 ) -> Optional[Union[Any, HTTPValidationError, InspectionMotor]]:
     """Update inspection status
@@ -132,7 +132,7 @@ def sync(
 async def asyncio_detailed(
     inspection_id: str,
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
     body: UpdateInspectionStatusTractianRequest,
 ) -> Response[Union[Any, HTTPValidationError, InspectionMotor]]:
     """Update inspection status
@@ -165,7 +165,7 @@ async def asyncio_detailed(
 async def asyncio(
     inspection_id: str,
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
     body: UpdateInspectionStatusTractianRequest,
 ) -> Optional[Union[Any, HTTPValidationError, InspectionMotor]]:
     """Update inspection status

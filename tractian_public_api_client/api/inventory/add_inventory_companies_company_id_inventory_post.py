@@ -57,10 +57,16 @@ def _build_response(
 def sync_detailed(
     company_id: str,
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
     body: InventoryMotorRequestAPI,
 ) -> Response[HTTPValidationError]:
     """Add Inventory
+
+     **If your company already use Supply Module you must use the Supply routes.**
+
+    Please use the new `POST /supply/inventory` endpoint instead.
+
+    This endpoint creates a new inventory item.
 
     Args:
         company_id (str):
@@ -89,10 +95,16 @@ def sync_detailed(
 def sync(
     company_id: str,
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
     body: InventoryMotorRequestAPI,
 ) -> Optional[HTTPValidationError]:
     """Add Inventory
+
+     **If your company already use Supply Module you must use the Supply routes.**
+
+    Please use the new `POST /supply/inventory` endpoint instead.
+
+    This endpoint creates a new inventory item.
 
     Args:
         company_id (str):
@@ -116,10 +128,16 @@ def sync(
 async def asyncio_detailed(
     company_id: str,
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
     body: InventoryMotorRequestAPI,
 ) -> Response[HTTPValidationError]:
     """Add Inventory
+
+     **If your company already use Supply Module you must use the Supply routes.**
+
+    Please use the new `POST /supply/inventory` endpoint instead.
+
+    This endpoint creates a new inventory item.
 
     Args:
         company_id (str):
@@ -146,10 +164,16 @@ async def asyncio_detailed(
 async def asyncio(
     company_id: str,
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
     body: InventoryMotorRequestAPI,
 ) -> Optional[HTTPValidationError]:
     """Add Inventory
+
+     **If your company already use Supply Module you must use the Supply routes.**
+
+    Please use the new `POST /supply/inventory` endpoint instead.
+
+    This endpoint creates a new inventory item.
 
     Args:
         company_id (str):

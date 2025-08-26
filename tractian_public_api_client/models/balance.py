@@ -10,8 +10,11 @@ T = TypeVar("T", bound="Balance")
 @_attrs_define
 class Balance:
     stock_quantity: float
+    """ Stock quantity. """
     available_quantity: float
+    """ Available quantity. """
     reserved_quantity: float
+    """ Reserved quantity. """
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:

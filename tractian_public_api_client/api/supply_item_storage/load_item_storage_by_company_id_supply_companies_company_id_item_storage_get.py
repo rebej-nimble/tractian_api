@@ -6,9 +6,6 @@ import httpx
 from ... import errors
 from ...client import AuthenticatedClient, Client
 from ...models.http_validation_error import HTTPValidationError
-from ...models.pagination_api_supply_item_storage_response import (
-    PaginationApiSupplyItemStorageResponse,
-)
 from ...types import UNSET, Response, Unset
 
 
@@ -61,11 +58,7 @@ def _get_kwargs(
 
 def _parse_response(
     *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[Union[HTTPValidationError, PaginationApiSupplyItemStorageResponse]]:
-    if response.status_code == 200:
-        response_200 = PaginationApiSupplyItemStorageResponse.from_dict(response.json())
-
-        return response_200
+) -> Optional[HTTPValidationError]:
     if response.status_code == 422:
         response_422 = HTTPValidationError.from_dict(response.json())
 
@@ -78,7 +71,7 @@ def _parse_response(
 
 def _build_response(
     *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Response[Union[HTTPValidationError, PaginationApiSupplyItemStorageResponse]]:
+) -> Response[HTTPValidationError]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -90,13 +83,13 @@ def _build_response(
 def sync_detailed(
     company_id: str,
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
     page: Union[Unset, int] = 1,
     limit: Union[Unset, int] = 10,
     deleted: Union[None, Unset, bool] = UNSET,
     disabled: Union[None, Unset, bool] = UNSET,
     sort: Union[None, Unset, str] = "id:asc",
-) -> Response[Union[HTTPValidationError, PaginationApiSupplyItemStorageResponse]]:
+) -> Response[HTTPValidationError]:
     """Load Item Storage By Company Id
 
      Load item storage by company id.
@@ -114,7 +107,7 @@ def sync_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[HTTPValidationError, PaginationApiSupplyItemStorageResponse]]
+        Response[HTTPValidationError]
     """
 
     kwargs = _get_kwargs(
@@ -136,13 +129,13 @@ def sync_detailed(
 def sync(
     company_id: str,
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
     page: Union[Unset, int] = 1,
     limit: Union[Unset, int] = 10,
     deleted: Union[None, Unset, bool] = UNSET,
     disabled: Union[None, Unset, bool] = UNSET,
     sort: Union[None, Unset, str] = "id:asc",
-) -> Optional[Union[HTTPValidationError, PaginationApiSupplyItemStorageResponse]]:
+) -> Optional[HTTPValidationError]:
     """Load Item Storage By Company Id
 
      Load item storage by company id.
@@ -160,7 +153,7 @@ def sync(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[HTTPValidationError, PaginationApiSupplyItemStorageResponse]
+        HTTPValidationError
     """
 
     return sync_detailed(
@@ -177,13 +170,13 @@ def sync(
 async def asyncio_detailed(
     company_id: str,
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
     page: Union[Unset, int] = 1,
     limit: Union[Unset, int] = 10,
     deleted: Union[None, Unset, bool] = UNSET,
     disabled: Union[None, Unset, bool] = UNSET,
     sort: Union[None, Unset, str] = "id:asc",
-) -> Response[Union[HTTPValidationError, PaginationApiSupplyItemStorageResponse]]:
+) -> Response[HTTPValidationError]:
     """Load Item Storage By Company Id
 
      Load item storage by company id.
@@ -201,7 +194,7 @@ async def asyncio_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[HTTPValidationError, PaginationApiSupplyItemStorageResponse]]
+        Response[HTTPValidationError]
     """
 
     kwargs = _get_kwargs(
@@ -221,13 +214,13 @@ async def asyncio_detailed(
 async def asyncio(
     company_id: str,
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
     page: Union[Unset, int] = 1,
     limit: Union[Unset, int] = 10,
     deleted: Union[None, Unset, bool] = UNSET,
     disabled: Union[None, Unset, bool] = UNSET,
     sort: Union[None, Unset, str] = "id:asc",
-) -> Optional[Union[HTTPValidationError, PaginationApiSupplyItemStorageResponse]]:
+) -> Optional[HTTPValidationError]:
     """Load Item Storage By Company Id
 
      Load item storage by company id.
@@ -245,7 +238,7 @@ async def asyncio(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[HTTPValidationError, PaginationApiSupplyItemStorageResponse]
+        HTTPValidationError
     """
 
     return (
