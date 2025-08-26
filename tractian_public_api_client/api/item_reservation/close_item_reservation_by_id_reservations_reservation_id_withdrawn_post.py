@@ -11,18 +11,12 @@ from ...types import Response
 
 def _get_kwargs(
     reservation_id: str,
-    *,
-    company_id: str,
 ) -> dict[str, Any]:
-    headers: dict[str, Any] = {}
-    headers["company-id"] = company_id
-
     _kwargs: dict[str, Any] = {
         "method": "post",
         "url": f"/reservations/{reservation_id}/withdrawn",
     }
 
-    _kwargs["headers"] = headers
     return _kwargs
 
 
@@ -62,14 +56,16 @@ def _build_response(
 def sync_detailed(
     reservation_id: str,
     *,
-    client: AuthenticatedClient,
-    company_id: str,
+    client: Union[AuthenticatedClient, Client],
 ) -> Response[Union[Any, HTTPValidationError]]:
     """Close Item Reservation By Id
 
+     **If your company already use Supply Module you must use the Supply routes.**
+
+    This endpoint withdraws/closes an item reservation.
+
     Args:
         reservation_id (str):
-        company_id (str):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -81,7 +77,6 @@ def sync_detailed(
 
     kwargs = _get_kwargs(
         reservation_id=reservation_id,
-        company_id=company_id,
     )
 
     response = client.get_httpx_client().request(
@@ -94,14 +89,16 @@ def sync_detailed(
 def sync(
     reservation_id: str,
     *,
-    client: AuthenticatedClient,
-    company_id: str,
+    client: Union[AuthenticatedClient, Client],
 ) -> Optional[Union[Any, HTTPValidationError]]:
     """Close Item Reservation By Id
 
+     **If your company already use Supply Module you must use the Supply routes.**
+
+    This endpoint withdraws/closes an item reservation.
+
     Args:
         reservation_id (str):
-        company_id (str):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -114,21 +111,22 @@ def sync(
     return sync_detailed(
         reservation_id=reservation_id,
         client=client,
-        company_id=company_id,
     ).parsed
 
 
 async def asyncio_detailed(
     reservation_id: str,
     *,
-    client: AuthenticatedClient,
-    company_id: str,
+    client: Union[AuthenticatedClient, Client],
 ) -> Response[Union[Any, HTTPValidationError]]:
     """Close Item Reservation By Id
 
+     **If your company already use Supply Module you must use the Supply routes.**
+
+    This endpoint withdraws/closes an item reservation.
+
     Args:
         reservation_id (str):
-        company_id (str):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -140,7 +138,6 @@ async def asyncio_detailed(
 
     kwargs = _get_kwargs(
         reservation_id=reservation_id,
-        company_id=company_id,
     )
 
     response = await client.get_async_httpx_client().request(**kwargs)
@@ -151,14 +148,16 @@ async def asyncio_detailed(
 async def asyncio(
     reservation_id: str,
     *,
-    client: AuthenticatedClient,
-    company_id: str,
+    client: Union[AuthenticatedClient, Client],
 ) -> Optional[Union[Any, HTTPValidationError]]:
     """Close Item Reservation By Id
 
+     **If your company already use Supply Module you must use the Supply routes.**
+
+    This endpoint withdraws/closes an item reservation.
+
     Args:
         reservation_id (str):
-        company_id (str):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -172,6 +171,5 @@ async def asyncio(
         await asyncio_detailed(
             reservation_id=reservation_id,
             client=client,
-            company_id=company_id,
         )
     ).parsed

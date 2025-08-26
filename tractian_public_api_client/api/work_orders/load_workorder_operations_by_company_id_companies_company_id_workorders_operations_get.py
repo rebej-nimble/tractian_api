@@ -69,7 +69,7 @@ def _build_response(
 def sync_detailed(
     company_id: str,
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
     page: Union[Unset, int] = 1,
     limit: Union[Unset, int] = 10,
 ) -> Response[Union[Any, HTTPValidationError, PaginationWorkOrderOperationMotor]]:
@@ -107,7 +107,7 @@ def sync_detailed(
 def sync(
     company_id: str,
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
     page: Union[Unset, int] = 1,
     limit: Union[Unset, int] = 10,
 ) -> Optional[Union[Any, HTTPValidationError, PaginationWorkOrderOperationMotor]]:
@@ -140,7 +140,7 @@ def sync(
 async def asyncio_detailed(
     company_id: str,
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
     page: Union[Unset, int] = 1,
     limit: Union[Unset, int] = 10,
 ) -> Response[Union[Any, HTTPValidationError, PaginationWorkOrderOperationMotor]]:
@@ -176,7 +176,7 @@ async def asyncio_detailed(
 async def asyncio(
     company_id: str,
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
     page: Union[Unset, int] = 1,
     limit: Union[Unset, int] = 10,
 ) -> Optional[Union[Any, HTTPValidationError, PaginationWorkOrderOperationMotor]]:

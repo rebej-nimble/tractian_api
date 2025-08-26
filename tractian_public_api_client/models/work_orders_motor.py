@@ -12,6 +12,7 @@ if TYPE_CHECKING:
     from ..models.identified_asset_failures import IdentifiedAssetFailures
     from ..models.total_cost import TotalCost
     from ..models.work_order_asset_motor import WorkOrderAssetMotor
+    from ..models.work_order_assigned_teams import WorkOrderAssignedTeams
     from ..models.work_order_completed_by_user import WorkOrderCompletedByUser
     from ..models.work_order_deleted_info import WorkOrderDeletedInfo
     from ..models.work_order_location_motor import WorkOrderLocationMotor
@@ -79,6 +80,7 @@ class WorkOrdersMotor:
     attachments: Union[None, Unset, list["WorkOrderMotorAttachment"]] = UNSET
     deleted: Union["WorkOrderDeletedInfo", None, Unset] = UNSET
     completed_by_user: Union["WorkOrderCompletedByUser", None, Unset] = UNSET
+    assigned_teams: Union[None, Unset, list["WorkOrderAssignedTeams"]] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -383,6 +385,18 @@ class WorkOrdersMotor:
         else:
             completed_by_user = self.completed_by_user
 
+        assigned_teams: Union[None, Unset, list[dict[str, Any]]]
+        if isinstance(self.assigned_teams, Unset):
+            assigned_teams = UNSET
+        elif isinstance(self.assigned_teams, list):
+            assigned_teams = []
+            for assigned_teams_type_0_item_data in self.assigned_teams:
+                assigned_teams_type_0_item = assigned_teams_type_0_item_data.to_dict()
+                assigned_teams.append(assigned_teams_type_0_item)
+
+        else:
+            assigned_teams = self.assigned_teams
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update(
@@ -464,6 +478,8 @@ class WorkOrdersMotor:
             field_dict["deleted"] = deleted
         if completed_by_user is not UNSET:
             field_dict["completedByUser"] = completed_by_user
+        if assigned_teams is not UNSET:
+            field_dict["assignedTeams"] = assigned_teams
 
         return field_dict
 
@@ -474,6 +490,7 @@ class WorkOrdersMotor:
         from ..models.identified_asset_failures import IdentifiedAssetFailures
         from ..models.total_cost import TotalCost
         from ..models.work_order_asset_motor import WorkOrderAssetMotor
+        from ..models.work_order_assigned_teams import WorkOrderAssignedTeams
         from ..models.work_order_completed_by_user import WorkOrderCompletedByUser
         from ..models.work_order_deleted_info import WorkOrderDeletedInfo
         from ..models.work_order_location_motor import WorkOrderLocationMotor
@@ -1032,6 +1049,32 @@ class WorkOrdersMotor:
 
         completed_by_user = _parse_completed_by_user(d.pop("completedByUser", UNSET))
 
+        def _parse_assigned_teams(
+            data: object,
+        ) -> Union[None, Unset, list["WorkOrderAssignedTeams"]]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, list):
+                    raise TypeError()
+                assigned_teams_type_0 = []
+                _assigned_teams_type_0 = data
+                for assigned_teams_type_0_item_data in _assigned_teams_type_0:
+                    assigned_teams_type_0_item = WorkOrderAssignedTeams.from_dict(
+                        assigned_teams_type_0_item_data
+                    )
+
+                    assigned_teams_type_0.append(assigned_teams_type_0_item)
+
+                return assigned_teams_type_0
+            except:  # noqa: E722
+                pass
+            return cast(Union[None, Unset, list["WorkOrderAssignedTeams"]], data)
+
+        assigned_teams = _parse_assigned_teams(d.pop("assignedTeams", UNSET))
+
         work_orders_motor = cls(
             id=id,
             status=status,
@@ -1073,6 +1116,7 @@ class WorkOrdersMotor:
             attachments=attachments,
             deleted=deleted,
             completed_by_user=completed_by_user,
+            assigned_teams=assigned_teams,
         )
 
         work_orders_motor.additional_properties = d

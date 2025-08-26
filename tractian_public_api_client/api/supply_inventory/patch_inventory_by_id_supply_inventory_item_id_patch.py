@@ -57,7 +57,7 @@ def _build_response(
 def sync_detailed(
     item_id: str,
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
     body: ApiSupplyInventoryPatchRequest,
 ) -> Response[HTTPValidationError]:
     """Patch Inventory By Id
@@ -91,7 +91,7 @@ def sync_detailed(
 def sync(
     item_id: str,
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
     body: ApiSupplyInventoryPatchRequest,
 ) -> Optional[HTTPValidationError]:
     """Patch Inventory By Id
@@ -120,7 +120,7 @@ def sync(
 async def asyncio_detailed(
     item_id: str,
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
     body: ApiSupplyInventoryPatchRequest,
 ) -> Response[HTTPValidationError]:
     """Patch Inventory By Id
@@ -152,7 +152,7 @@ async def asyncio_detailed(
 async def asyncio(
     item_id: str,
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
     body: ApiSupplyInventoryPatchRequest,
 ) -> Optional[HTTPValidationError]:
     """Patch Inventory By Id

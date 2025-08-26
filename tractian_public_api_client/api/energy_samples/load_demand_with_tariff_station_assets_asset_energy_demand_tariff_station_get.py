@@ -73,7 +73,7 @@ def _build_response(
 def sync_detailed(
     asset: str,
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
     start: str,
     end: str,
 ) -> Response[Union[Any, DemandSamplesWithTariffStation, HTTPValidationError]]:
@@ -116,7 +116,7 @@ def sync_detailed(
 def sync(
     asset: str,
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
     start: str,
     end: str,
 ) -> Optional[Union[Any, DemandSamplesWithTariffStation, HTTPValidationError]]:
@@ -154,7 +154,7 @@ def sync(
 async def asyncio_detailed(
     asset: str,
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
     start: str,
     end: str,
 ) -> Response[Union[Any, DemandSamplesWithTariffStation, HTTPValidationError]]:
@@ -195,7 +195,7 @@ async def asyncio_detailed(
 async def asyncio(
     asset: str,
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
     start: str,
     end: str,
 ) -> Optional[Union[Any, DemandSamplesWithTariffStation, HTTPValidationError]]:

@@ -12,11 +12,17 @@ T = TypeVar("T", bound="DeletedInfo")
 @_attrs_define
 class DeletedInfo:
     value: bool
+    """ Boolean value, is deleted or not. """
     reason: Union[None, Unset, str] = UNSET
+    """ Reason. """
     deleted_at: Union[None, Unset, str] = UNSET
+    """ Deleted at. """
     deleted_by_user_id: Union[None, Unset, str] = UNSET
+    """ Deleted by user id. """
     restored_by_user_id: Union[None, Unset, str] = UNSET
+    """ Restored by user id. """
     restored_at: Union[None, Unset, str] = UNSET
+    """ Restored at. """
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:

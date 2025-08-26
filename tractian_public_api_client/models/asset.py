@@ -55,6 +55,7 @@ class Asset:
     deleted: Union[Unset, "Deleted"] = UNSET
     inventory_items: Union[None, Unset, list["AssetInventoryItemMotor"]] = UNSET
     asset_custom_fields: Union[None, Unset, list["EntityCustomField"]] = UNSET
+    year: Union[None, Unset, int, str] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -285,6 +286,12 @@ class Asset:
         else:
             asset_custom_fields = self.asset_custom_fields
 
+        year: Union[None, Unset, int, str]
+        if isinstance(self.year, Unset):
+            year = UNSET
+        else:
+            year = self.year
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update(
@@ -352,6 +359,8 @@ class Asset:
             field_dict["inventoryItems"] = inventory_items
         if asset_custom_fields is not UNSET:
             field_dict["assetCustomFields"] = asset_custom_fields
+        if year is not UNSET:
+            field_dict["year"] = year
 
         return field_dict
 
@@ -769,6 +778,15 @@ class Asset:
             d.pop("assetCustomFields", UNSET)
         )
 
+        def _parse_year(data: object) -> Union[None, Unset, int, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, int, str], data)
+
+        year = _parse_year(d.pop("year", UNSET))
+
         asset = cls(
             id=id,
             name=name,
@@ -802,6 +820,7 @@ class Asset:
             deleted=deleted,
             inventory_items=inventory_items,
             asset_custom_fields=asset_custom_fields,
+            year=year,
         )
 
         asset.additional_properties = d

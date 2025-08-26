@@ -1,8 +1,10 @@
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
+
+from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="CurrencyCustomField")
 
@@ -12,6 +14,7 @@ class CurrencyCustomField:
     id_custom_field: str
     field_type: str
     value: str
+    title: Union[None, Unset, str] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -20,6 +23,12 @@ class CurrencyCustomField:
         field_type = self.field_type
 
         value = self.value
+
+        title: Union[None, Unset, str]
+        if isinstance(self.title, Unset):
+            title = UNSET
+        else:
+            title = self.title
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -30,6 +39,8 @@ class CurrencyCustomField:
                 "value": value,
             }
         )
+        if title is not UNSET:
+            field_dict["title"] = title
 
         return field_dict
 
@@ -42,10 +53,20 @@ class CurrencyCustomField:
 
         value = d.pop("value")
 
+        def _parse_title(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        title = _parse_title(d.pop("title", UNSET))
+
         currency_custom_field = cls(
             id_custom_field=id_custom_field,
             field_type=field_type,
             value=value,
+            title=title,
         )
 
         currency_custom_field.additional_properties = d

@@ -58,7 +58,7 @@ def _build_response(
 def sync_detailed(
     request_id: str,
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
 ) -> Response[Union[Any, HTTPValidationError, RequestsMotor]]:
     """Retrieve Request by ID
 
@@ -87,7 +87,7 @@ def sync_detailed(
 def sync(
     request_id: str,
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
 ) -> Optional[Union[Any, HTTPValidationError, RequestsMotor]]:
     """Retrieve Request by ID
 
@@ -111,7 +111,7 @@ def sync(
 async def asyncio_detailed(
     request_id: str,
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
 ) -> Response[Union[Any, HTTPValidationError, RequestsMotor]]:
     """Retrieve Request by ID
 
@@ -138,7 +138,7 @@ async def asyncio_detailed(
 async def asyncio(
     request_id: str,
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
 ) -> Optional[Union[Any, HTTPValidationError, RequestsMotor]]:
     """Retrieve Request by ID
 

@@ -68,7 +68,7 @@ def _build_response(
 def sync_detailed(
     insight_id: str,
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
     body: UpdateInsightStatusTractianRequest,
 ) -> Response[Union[Any, HTTPValidationError]]:
     """Update an insight status
@@ -102,7 +102,7 @@ def sync_detailed(
 def sync(
     insight_id: str,
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
     body: UpdateInsightStatusTractianRequest,
 ) -> Optional[Union[Any, HTTPValidationError]]:
     """Update an insight status
@@ -131,7 +131,7 @@ def sync(
 async def asyncio_detailed(
     insight_id: str,
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
     body: UpdateInsightStatusTractianRequest,
 ) -> Response[Union[Any, HTTPValidationError]]:
     """Update an insight status
@@ -163,7 +163,7 @@ async def asyncio_detailed(
 async def asyncio(
     insight_id: str,
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
     body: UpdateInsightStatusTractianRequest,
 ) -> Optional[Union[Any, HTTPValidationError]]:
     """Update an insight status

@@ -62,10 +62,14 @@ def _build_response(
 def sync_detailed(
     company_id: str,
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
     body: ItemReservationRequestAPI,
 ) -> Response[Union[HTTPValidationError, ItemReservationMotor]]:
     """Add Reservation
+
+     **If your company already use Supply Module you must use the Supply routes.**
+
+    This endpoint creates a new item reservation.
 
     Args:
         company_id (str):
@@ -94,10 +98,14 @@ def sync_detailed(
 def sync(
     company_id: str,
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
     body: ItemReservationRequestAPI,
 ) -> Optional[Union[HTTPValidationError, ItemReservationMotor]]:
     """Add Reservation
+
+     **If your company already use Supply Module you must use the Supply routes.**
+
+    This endpoint creates a new item reservation.
 
     Args:
         company_id (str):
@@ -121,10 +129,14 @@ def sync(
 async def asyncio_detailed(
     company_id: str,
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
     body: ItemReservationRequestAPI,
 ) -> Response[Union[HTTPValidationError, ItemReservationMotor]]:
     """Add Reservation
+
+     **If your company already use Supply Module you must use the Supply routes.**
+
+    This endpoint creates a new item reservation.
 
     Args:
         company_id (str):
@@ -151,10 +163,14 @@ async def asyncio_detailed(
 async def asyncio(
     company_id: str,
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
     body: ItemReservationRequestAPI,
 ) -> Optional[Union[HTTPValidationError, ItemReservationMotor]]:
     """Add Reservation
+
+     **If your company already use Supply Module you must use the Supply routes.**
+
+    This endpoint creates a new item reservation.
 
     Args:
         company_id (str):

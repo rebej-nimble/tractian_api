@@ -7,7 +7,7 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
-    from ..models.procedure_motor import ProcedureMotor
+    from ..models.inspection_procedure_motor import InspectionProcedureMotor
 
 
 T = TypeVar("T", bound="InspectionMotor")
@@ -29,7 +29,7 @@ class InspectionMotor:
     created_by_user_id: Union[None, Unset, str] = UNSET
     updated_by_user_id: Union[None, Unset, str] = UNSET
     number: Union[None, Unset, int] = UNSET
-    procedures: Union[None, Unset, list["ProcedureMotor"]] = UNSET
+    procedures: Union[None, Unset, list["InspectionProcedureMotor"]] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -151,7 +151,7 @@ class InspectionMotor:
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.procedure_motor import ProcedureMotor
+        from ..models.inspection_procedure_motor import InspectionProcedureMotor
 
         d = dict(src_dict)
         company_id = d.pop("companyId")
@@ -263,7 +263,7 @@ class InspectionMotor:
 
         def _parse_procedures(
             data: object,
-        ) -> Union[None, Unset, list["ProcedureMotor"]]:
+        ) -> Union[None, Unset, list["InspectionProcedureMotor"]]:
             if data is None:
                 return data
             if isinstance(data, Unset):
@@ -274,7 +274,7 @@ class InspectionMotor:
                 procedures_type_0 = []
                 _procedures_type_0 = data
                 for procedures_type_0_item_data in _procedures_type_0:
-                    procedures_type_0_item = ProcedureMotor.from_dict(
+                    procedures_type_0_item = InspectionProcedureMotor.from_dict(
                         procedures_type_0_item_data
                     )
 
@@ -283,7 +283,7 @@ class InspectionMotor:
                 return procedures_type_0
             except:  # noqa: E722
                 pass
-            return cast(Union[None, Unset, list["ProcedureMotor"]], data)
+            return cast(Union[None, Unset, list["InspectionProcedureMotor"]], data)
 
         procedures = _parse_procedures(d.pop("procedures", UNSET))
 

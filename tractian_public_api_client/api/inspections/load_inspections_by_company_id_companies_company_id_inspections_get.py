@@ -5,8 +5,8 @@ import httpx
 
 from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...models.api_list_inspections_response import ApiListInspectionsResponse
 from ...models.http_validation_error import HTTPValidationError
-from ...models.inspection_motor import InspectionMotor
 from ...types import UNSET, Response, Unset
 
 
@@ -18,6 +18,7 @@ def _get_kwargs(
     page: Union[Unset, int] = 1,
     limit: Union[Unset, int] = 10,
     load_procedures: Union[Unset, bool] = False,
+    load_insights_prescriptions: Union[Unset, bool] = False,
 ) -> dict[str, Any]:
     params: dict[str, Any] = {}
 
@@ -36,6 +37,8 @@ def _get_kwargs(
 
     params["loadProcedures"] = load_procedures
 
+    params["loadInsightsPrescriptions"] = load_insights_prescriptions
+
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 
     _kwargs: dict[str, Any] = {
@@ -49,12 +52,14 @@ def _get_kwargs(
 
 def _parse_response(
     *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[Union[Any, HTTPValidationError, list["InspectionMotor"]]]:
+) -> Optional[Union[Any, HTTPValidationError, list["ApiListInspectionsResponse"]]]:
     if response.status_code == 200:
         response_200 = []
         _response_200 = response.json()
         for response_200_item_data in _response_200:
-            response_200_item = InspectionMotor.from_dict(response_200_item_data)
+            response_200_item = ApiListInspectionsResponse.from_dict(
+                response_200_item_data
+            )
 
             response_200.append(response_200_item)
 
@@ -74,7 +79,7 @@ def _parse_response(
 
 def _build_response(
     *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Response[Union[Any, HTTPValidationError, list["InspectionMotor"]]]:
+) -> Response[Union[Any, HTTPValidationError, list["ApiListInspectionsResponse"]]]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -86,13 +91,14 @@ def _build_response(
 def sync_detailed(
     company_id: str,
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
     created_at_start: Union[None, Unset, str] = UNSET,
     created_at_end: Union[Unset, str] = UNSET,
     page: Union[Unset, int] = 1,
     limit: Union[Unset, int] = 10,
     load_procedures: Union[Unset, bool] = False,
-) -> Response[Union[Any, HTTPValidationError, list["InspectionMotor"]]]:
+    load_insights_prescriptions: Union[Unset, bool] = False,
+) -> Response[Union[Any, HTTPValidationError, list["ApiListInspectionsResponse"]]]:
     """List inspections by company ID
 
      Fetches a list of inspections associated with the specified company. If no inspections are found,
@@ -107,13 +113,15 @@ def sync_detailed(
         limit (Union[Unset, int]): Limit for the inspection period Default: 10.
         load_procedures (Union[Unset, bool]): Whether to load procedures for the inspection
             Default: False.
+        load_insights_prescriptions (Union[Unset, bool]): Whether to load insights prescriptions
+            for the inspection Default: False.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[Any, HTTPValidationError, list['InspectionMotor']]]
+        Response[Union[Any, HTTPValidationError, list['ApiListInspectionsResponse']]]
     """
 
     kwargs = _get_kwargs(
@@ -123,6 +131,7 @@ def sync_detailed(
         page=page,
         limit=limit,
         load_procedures=load_procedures,
+        load_insights_prescriptions=load_insights_prescriptions,
     )
 
     response = client.get_httpx_client().request(
@@ -135,13 +144,14 @@ def sync_detailed(
 def sync(
     company_id: str,
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
     created_at_start: Union[None, Unset, str] = UNSET,
     created_at_end: Union[Unset, str] = UNSET,
     page: Union[Unset, int] = 1,
     limit: Union[Unset, int] = 10,
     load_procedures: Union[Unset, bool] = False,
-) -> Optional[Union[Any, HTTPValidationError, list["InspectionMotor"]]]:
+    load_insights_prescriptions: Union[Unset, bool] = False,
+) -> Optional[Union[Any, HTTPValidationError, list["ApiListInspectionsResponse"]]]:
     """List inspections by company ID
 
      Fetches a list of inspections associated with the specified company. If no inspections are found,
@@ -156,13 +166,15 @@ def sync(
         limit (Union[Unset, int]): Limit for the inspection period Default: 10.
         load_procedures (Union[Unset, bool]): Whether to load procedures for the inspection
             Default: False.
+        load_insights_prescriptions (Union[Unset, bool]): Whether to load insights prescriptions
+            for the inspection Default: False.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[Any, HTTPValidationError, list['InspectionMotor']]
+        Union[Any, HTTPValidationError, list['ApiListInspectionsResponse']]
     """
 
     return sync_detailed(
@@ -173,19 +185,21 @@ def sync(
         page=page,
         limit=limit,
         load_procedures=load_procedures,
+        load_insights_prescriptions=load_insights_prescriptions,
     ).parsed
 
 
 async def asyncio_detailed(
     company_id: str,
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
     created_at_start: Union[None, Unset, str] = UNSET,
     created_at_end: Union[Unset, str] = UNSET,
     page: Union[Unset, int] = 1,
     limit: Union[Unset, int] = 10,
     load_procedures: Union[Unset, bool] = False,
-) -> Response[Union[Any, HTTPValidationError, list["InspectionMotor"]]]:
+    load_insights_prescriptions: Union[Unset, bool] = False,
+) -> Response[Union[Any, HTTPValidationError, list["ApiListInspectionsResponse"]]]:
     """List inspections by company ID
 
      Fetches a list of inspections associated with the specified company. If no inspections are found,
@@ -200,13 +214,15 @@ async def asyncio_detailed(
         limit (Union[Unset, int]): Limit for the inspection period Default: 10.
         load_procedures (Union[Unset, bool]): Whether to load procedures for the inspection
             Default: False.
+        load_insights_prescriptions (Union[Unset, bool]): Whether to load insights prescriptions
+            for the inspection Default: False.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[Any, HTTPValidationError, list['InspectionMotor']]]
+        Response[Union[Any, HTTPValidationError, list['ApiListInspectionsResponse']]]
     """
 
     kwargs = _get_kwargs(
@@ -216,6 +232,7 @@ async def asyncio_detailed(
         page=page,
         limit=limit,
         load_procedures=load_procedures,
+        load_insights_prescriptions=load_insights_prescriptions,
     )
 
     response = await client.get_async_httpx_client().request(**kwargs)
@@ -226,13 +243,14 @@ async def asyncio_detailed(
 async def asyncio(
     company_id: str,
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
     created_at_start: Union[None, Unset, str] = UNSET,
     created_at_end: Union[Unset, str] = UNSET,
     page: Union[Unset, int] = 1,
     limit: Union[Unset, int] = 10,
     load_procedures: Union[Unset, bool] = False,
-) -> Optional[Union[Any, HTTPValidationError, list["InspectionMotor"]]]:
+    load_insights_prescriptions: Union[Unset, bool] = False,
+) -> Optional[Union[Any, HTTPValidationError, list["ApiListInspectionsResponse"]]]:
     """List inspections by company ID
 
      Fetches a list of inspections associated with the specified company. If no inspections are found,
@@ -247,13 +265,15 @@ async def asyncio(
         limit (Union[Unset, int]): Limit for the inspection period Default: 10.
         load_procedures (Union[Unset, bool]): Whether to load procedures for the inspection
             Default: False.
+        load_insights_prescriptions (Union[Unset, bool]): Whether to load insights prescriptions
+            for the inspection Default: False.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[Any, HTTPValidationError, list['InspectionMotor']]
+        Union[Any, HTTPValidationError, list['ApiListInspectionsResponse']]
     """
 
     return (
@@ -265,5 +285,6 @@ async def asyncio(
             page=page,
             limit=limit,
             load_procedures=load_procedures,
+            load_insights_prescriptions=load_insights_prescriptions,
         )
     ).parsed

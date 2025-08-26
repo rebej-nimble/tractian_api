@@ -74,7 +74,7 @@ def sync_detailed(
     procedure_id: str,
     field_id: str,
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
     body: UpdateInspectionProcedureTractianRequest,
 ) -> Response[Union[Any, HTTPValidationError, InspectionMotor]]:
     r"""Update inspection procedure
@@ -119,7 +119,7 @@ def sync(
     procedure_id: str,
     field_id: str,
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
     body: UpdateInspectionProcedureTractianRequest,
 ) -> Optional[Union[Any, HTTPValidationError, InspectionMotor]]:
     r"""Update inspection procedure
@@ -159,7 +159,7 @@ async def asyncio_detailed(
     procedure_id: str,
     field_id: str,
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
     body: UpdateInspectionProcedureTractianRequest,
 ) -> Response[Union[Any, HTTPValidationError, InspectionMotor]]:
     r"""Update inspection procedure
@@ -202,7 +202,7 @@ async def asyncio(
     procedure_id: str,
     field_id: str,
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
     body: UpdateInspectionProcedureTractianRequest,
 ) -> Optional[Union[Any, HTTPValidationError, InspectionMotor]]:
     r"""Update inspection procedure
