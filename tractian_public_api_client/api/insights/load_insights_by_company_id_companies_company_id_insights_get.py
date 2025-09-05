@@ -6,7 +6,9 @@ import httpx
 from ... import errors
 from ...client import AuthenticatedClient, Client
 from ...models.http_validation_error import HTTPValidationError
-from ...models.pagination_insight_cerberus import PaginationInsightCerberus
+from ...models.pagination_api_list_insights_response import (
+    PaginationApiListInsightsResponse,
+)
 from ...types import UNSET, Response, Unset
 
 
@@ -18,6 +20,9 @@ def _get_kwargs(
     page: Union[Unset, int] = 1,
     limit: Union[Unset, int] = 10,
     deleted: Union[Unset, bool] = False,
+    load_prescription: Union[Unset, bool] = False,
+    load_description: Union[Unset, bool] = False,
+    sort: Union[Unset, str] = "createdAtDesc",
 ) -> dict[str, Any]:
     params: dict[str, Any] = {}
 
@@ -36,6 +41,12 @@ def _get_kwargs(
 
     params["deleted"] = deleted
 
+    params["loadPrescription"] = load_prescription
+
+    params["loadDescription"] = load_description
+
+    params["sort"] = sort
+
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 
     _kwargs: dict[str, Any] = {
@@ -49,9 +60,9 @@ def _get_kwargs(
 
 def _parse_response(
     *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[Union[Any, HTTPValidationError, PaginationInsightCerberus]]:
+) -> Optional[Union[Any, HTTPValidationError, PaginationApiListInsightsResponse]]:
     if response.status_code == 200:
-        response_200 = PaginationInsightCerberus.from_dict(response.json())
+        response_200 = PaginationApiListInsightsResponse.from_dict(response.json())
 
         return response_200
     if response.status_code == 500:
@@ -69,7 +80,7 @@ def _parse_response(
 
 def _build_response(
     *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Response[Union[Any, HTTPValidationError, PaginationInsightCerberus]]:
+) -> Response[Union[Any, HTTPValidationError, PaginationApiListInsightsResponse]]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -81,13 +92,16 @@ def _build_response(
 def sync_detailed(
     company_id: str,
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
     reference_date_start: Union[None, Unset, str] = UNSET,
     reference_date_end: Union[Unset, str] = UNSET,
     page: Union[Unset, int] = 1,
     limit: Union[Unset, int] = 10,
     deleted: Union[Unset, bool] = False,
-) -> Response[Union[Any, HTTPValidationError, PaginationInsightCerberus]]:
+    load_prescription: Union[Unset, bool] = False,
+    load_description: Union[Unset, bool] = False,
+    sort: Union[Unset, str] = "createdAtDesc",
+) -> Response[Union[Any, HTTPValidationError, PaginationApiListInsightsResponse]]:
     """List insights by company ID
 
      Fetches a list of insights overview associated with the specified company. The insights provide
@@ -103,13 +117,19 @@ def sync_detailed(
         page (Union[Unset, int]): Page number for the insights Default: 1.
         limit (Union[Unset, int]): Number of insights per page Default: 10.
         deleted (Union[Unset, bool]): Filter insights by deleted status Default: False.
+        load_prescription (Union[Unset, bool]): Filter if insights will return procedure
+            prescriptions Default: False.
+        load_description (Union[Unset, bool]): Filter if insights will return description Default:
+            False.
+        sort (Union[Unset, str]): Sort insights by createdAtAsc or createdAtDesc Default:
+            'createdAtDesc'.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[Any, HTTPValidationError, PaginationInsightCerberus]]
+        Response[Union[Any, HTTPValidationError, PaginationApiListInsightsResponse]]
     """
 
     kwargs = _get_kwargs(
@@ -119,6 +139,9 @@ def sync_detailed(
         page=page,
         limit=limit,
         deleted=deleted,
+        load_prescription=load_prescription,
+        load_description=load_description,
+        sort=sort,
     )
 
     response = client.get_httpx_client().request(
@@ -131,13 +154,16 @@ def sync_detailed(
 def sync(
     company_id: str,
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
     reference_date_start: Union[None, Unset, str] = UNSET,
     reference_date_end: Union[Unset, str] = UNSET,
     page: Union[Unset, int] = 1,
     limit: Union[Unset, int] = 10,
     deleted: Union[Unset, bool] = False,
-) -> Optional[Union[Any, HTTPValidationError, PaginationInsightCerberus]]:
+    load_prescription: Union[Unset, bool] = False,
+    load_description: Union[Unset, bool] = False,
+    sort: Union[Unset, str] = "createdAtDesc",
+) -> Optional[Union[Any, HTTPValidationError, PaginationApiListInsightsResponse]]:
     """List insights by company ID
 
      Fetches a list of insights overview associated with the specified company. The insights provide
@@ -153,13 +179,19 @@ def sync(
         page (Union[Unset, int]): Page number for the insights Default: 1.
         limit (Union[Unset, int]): Number of insights per page Default: 10.
         deleted (Union[Unset, bool]): Filter insights by deleted status Default: False.
+        load_prescription (Union[Unset, bool]): Filter if insights will return procedure
+            prescriptions Default: False.
+        load_description (Union[Unset, bool]): Filter if insights will return description Default:
+            False.
+        sort (Union[Unset, str]): Sort insights by createdAtAsc or createdAtDesc Default:
+            'createdAtDesc'.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[Any, HTTPValidationError, PaginationInsightCerberus]
+        Union[Any, HTTPValidationError, PaginationApiListInsightsResponse]
     """
 
     return sync_detailed(
@@ -170,19 +202,25 @@ def sync(
         page=page,
         limit=limit,
         deleted=deleted,
+        load_prescription=load_prescription,
+        load_description=load_description,
+        sort=sort,
     ).parsed
 
 
 async def asyncio_detailed(
     company_id: str,
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
     reference_date_start: Union[None, Unset, str] = UNSET,
     reference_date_end: Union[Unset, str] = UNSET,
     page: Union[Unset, int] = 1,
     limit: Union[Unset, int] = 10,
     deleted: Union[Unset, bool] = False,
-) -> Response[Union[Any, HTTPValidationError, PaginationInsightCerberus]]:
+    load_prescription: Union[Unset, bool] = False,
+    load_description: Union[Unset, bool] = False,
+    sort: Union[Unset, str] = "createdAtDesc",
+) -> Response[Union[Any, HTTPValidationError, PaginationApiListInsightsResponse]]:
     """List insights by company ID
 
      Fetches a list of insights overview associated with the specified company. The insights provide
@@ -198,13 +236,19 @@ async def asyncio_detailed(
         page (Union[Unset, int]): Page number for the insights Default: 1.
         limit (Union[Unset, int]): Number of insights per page Default: 10.
         deleted (Union[Unset, bool]): Filter insights by deleted status Default: False.
+        load_prescription (Union[Unset, bool]): Filter if insights will return procedure
+            prescriptions Default: False.
+        load_description (Union[Unset, bool]): Filter if insights will return description Default:
+            False.
+        sort (Union[Unset, str]): Sort insights by createdAtAsc or createdAtDesc Default:
+            'createdAtDesc'.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[Any, HTTPValidationError, PaginationInsightCerberus]]
+        Response[Union[Any, HTTPValidationError, PaginationApiListInsightsResponse]]
     """
 
     kwargs = _get_kwargs(
@@ -214,6 +258,9 @@ async def asyncio_detailed(
         page=page,
         limit=limit,
         deleted=deleted,
+        load_prescription=load_prescription,
+        load_description=load_description,
+        sort=sort,
     )
 
     response = await client.get_async_httpx_client().request(**kwargs)
@@ -224,13 +271,16 @@ async def asyncio_detailed(
 async def asyncio(
     company_id: str,
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
     reference_date_start: Union[None, Unset, str] = UNSET,
     reference_date_end: Union[Unset, str] = UNSET,
     page: Union[Unset, int] = 1,
     limit: Union[Unset, int] = 10,
     deleted: Union[Unset, bool] = False,
-) -> Optional[Union[Any, HTTPValidationError, PaginationInsightCerberus]]:
+    load_prescription: Union[Unset, bool] = False,
+    load_description: Union[Unset, bool] = False,
+    sort: Union[Unset, str] = "createdAtDesc",
+) -> Optional[Union[Any, HTTPValidationError, PaginationApiListInsightsResponse]]:
     """List insights by company ID
 
      Fetches a list of insights overview associated with the specified company. The insights provide
@@ -246,13 +296,19 @@ async def asyncio(
         page (Union[Unset, int]): Page number for the insights Default: 1.
         limit (Union[Unset, int]): Number of insights per page Default: 10.
         deleted (Union[Unset, bool]): Filter insights by deleted status Default: False.
+        load_prescription (Union[Unset, bool]): Filter if insights will return procedure
+            prescriptions Default: False.
+        load_description (Union[Unset, bool]): Filter if insights will return description Default:
+            False.
+        sort (Union[Unset, str]): Sort insights by createdAtAsc or createdAtDesc Default:
+            'createdAtDesc'.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[Any, HTTPValidationError, PaginationInsightCerberus]
+        Union[Any, HTTPValidationError, PaginationApiListInsightsResponse]
     """
 
     return (
@@ -264,5 +320,8 @@ async def asyncio(
             page=page,
             limit=limit,
             deleted=deleted,
+            load_prescription=load_prescription,
+            load_description=load_description,
+            sort=sort,
         )
     ).parsed

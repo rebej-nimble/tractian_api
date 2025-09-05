@@ -1,5 +1,5 @@
 from http import HTTPStatus
-from typing import Any, Optional, Union
+from typing import Any, Optional, Union, cast
 
 import httpx
 
@@ -7,6 +7,9 @@ from ... import errors
 from ...client import AuthenticatedClient, Client
 from ...models.api_supply_inventory_adjustment_request import (
     ApiSupplyInventoryAdjustmentRequest,
+)
+from ...models.api_supply_inventory_adjustment_response import (
+    ApiSupplyInventoryAdjustmentResponse,
 )
 from ...models.http_validation_error import HTTPValidationError
 from ...types import Response
@@ -33,10 +36,14 @@ def _get_kwargs(
 
 def _parse_response(
     *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[Union[Any, HTTPValidationError]]:
+) -> Optional[Union[Any, ApiSupplyInventoryAdjustmentResponse, HTTPValidationError]]:
     if response.status_code == 200:
-        response_200 = response.json()
+        response_200 = ApiSupplyInventoryAdjustmentResponse.from_dict(response.json())
+
         return response_200
+    if response.status_code == 201:
+        response_201 = cast(Any, None)
+        return response_201
     if response.status_code == 422:
         response_422 = HTTPValidationError.from_dict(response.json())
 
@@ -49,7 +56,7 @@ def _parse_response(
 
 def _build_response(
     *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Response[Union[Any, HTTPValidationError]]:
+) -> Response[Union[Any, ApiSupplyInventoryAdjustmentResponse, HTTPValidationError]]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -60,10 +67,12 @@ def _build_response(
 
 def sync_detailed(
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
     body: ApiSupplyInventoryAdjustmentRequest,
-) -> Response[Union[Any, HTTPValidationError]]:
+) -> Response[Union[Any, ApiSupplyInventoryAdjustmentResponse, HTTPValidationError]]:
     """Create Inventory Adjustment
+
+     Create a inventory adjustment.
 
     Args:
         body (ApiSupplyInventoryAdjustmentRequest):
@@ -73,7 +82,7 @@ def sync_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[Any, HTTPValidationError]]
+        Response[Union[Any, ApiSupplyInventoryAdjustmentResponse, HTTPValidationError]]
     """
 
     kwargs = _get_kwargs(
@@ -89,10 +98,12 @@ def sync_detailed(
 
 def sync(
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
     body: ApiSupplyInventoryAdjustmentRequest,
-) -> Optional[Union[Any, HTTPValidationError]]:
+) -> Optional[Union[Any, ApiSupplyInventoryAdjustmentResponse, HTTPValidationError]]:
     """Create Inventory Adjustment
+
+     Create a inventory adjustment.
 
     Args:
         body (ApiSupplyInventoryAdjustmentRequest):
@@ -102,7 +113,7 @@ def sync(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[Any, HTTPValidationError]
+        Union[Any, ApiSupplyInventoryAdjustmentResponse, HTTPValidationError]
     """
 
     return sync_detailed(
@@ -113,10 +124,12 @@ def sync(
 
 async def asyncio_detailed(
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
     body: ApiSupplyInventoryAdjustmentRequest,
-) -> Response[Union[Any, HTTPValidationError]]:
+) -> Response[Union[Any, ApiSupplyInventoryAdjustmentResponse, HTTPValidationError]]:
     """Create Inventory Adjustment
+
+     Create a inventory adjustment.
 
     Args:
         body (ApiSupplyInventoryAdjustmentRequest):
@@ -126,7 +139,7 @@ async def asyncio_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[Any, HTTPValidationError]]
+        Response[Union[Any, ApiSupplyInventoryAdjustmentResponse, HTTPValidationError]]
     """
 
     kwargs = _get_kwargs(
@@ -140,10 +153,12 @@ async def asyncio_detailed(
 
 async def asyncio(
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
     body: ApiSupplyInventoryAdjustmentRequest,
-) -> Optional[Union[Any, HTTPValidationError]]:
+) -> Optional[Union[Any, ApiSupplyInventoryAdjustmentResponse, HTTPValidationError]]:
     """Create Inventory Adjustment
+
+     Create a inventory adjustment.
 
     Args:
         body (ApiSupplyInventoryAdjustmentRequest):
@@ -153,7 +168,7 @@ async def asyncio(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[Any, HTTPValidationError]
+        Union[Any, ApiSupplyInventoryAdjustmentResponse, HTTPValidationError]
     """
 
     return (

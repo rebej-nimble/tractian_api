@@ -5,7 +5,9 @@ import httpx
 
 from ... import errors
 from ...client import AuthenticatedClient, Client
-from ...models.cost_samples_with_tariff_station import CostSamplesWithTariffStation
+from ...models.api_cost_samples_with_tariff_station_response import (
+    ApiCostSamplesWithTariffStationResponse,
+)
 from ...models.http_validation_error import HTTPValidationError
 from ...types import UNSET, Response
 
@@ -35,9 +37,11 @@ def _get_kwargs(
 
 def _parse_response(
     *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[Union[Any, CostSamplesWithTariffStation, HTTPValidationError]]:
+) -> Optional[Union[Any, ApiCostSamplesWithTariffStationResponse, HTTPValidationError]]:
     if response.status_code == 200:
-        response_200 = CostSamplesWithTariffStation.from_dict(response.json())
+        response_200 = ApiCostSamplesWithTariffStationResponse.from_dict(
+            response.json()
+        )
 
         return response_200
     if response.status_code == 204:
@@ -61,7 +65,7 @@ def _parse_response(
 
 def _build_response(
     *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Response[Union[Any, CostSamplesWithTariffStation, HTTPValidationError]]:
+) -> Response[Union[Any, ApiCostSamplesWithTariffStationResponse, HTTPValidationError]]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -73,10 +77,10 @@ def _build_response(
 def sync_detailed(
     asset: str,
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
     start: str,
     end: str,
-) -> Response[Union[Any, CostSamplesWithTariffStation, HTTPValidationError]]:
+) -> Response[Union[Any, ApiCostSamplesWithTariffStationResponse, HTTPValidationError]]:
     """Load Energy Cost with Tariff Station by Asset ID
 
      Fetches energy cost data in the company currency with tariff station for a specified asset within a
@@ -97,7 +101,7 @@ def sync_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[Any, CostSamplesWithTariffStation, HTTPValidationError]]
+        Response[Union[Any, ApiCostSamplesWithTariffStationResponse, HTTPValidationError]]
     """
 
     kwargs = _get_kwargs(
@@ -116,10 +120,10 @@ def sync_detailed(
 def sync(
     asset: str,
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
     start: str,
     end: str,
-) -> Optional[Union[Any, CostSamplesWithTariffStation, HTTPValidationError]]:
+) -> Optional[Union[Any, ApiCostSamplesWithTariffStationResponse, HTTPValidationError]]:
     """Load Energy Cost with Tariff Station by Asset ID
 
      Fetches energy cost data in the company currency with tariff station for a specified asset within a
@@ -140,7 +144,7 @@ def sync(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[Any, CostSamplesWithTariffStation, HTTPValidationError]
+        Union[Any, ApiCostSamplesWithTariffStationResponse, HTTPValidationError]
     """
 
     return sync_detailed(
@@ -154,10 +158,10 @@ def sync(
 async def asyncio_detailed(
     asset: str,
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
     start: str,
     end: str,
-) -> Response[Union[Any, CostSamplesWithTariffStation, HTTPValidationError]]:
+) -> Response[Union[Any, ApiCostSamplesWithTariffStationResponse, HTTPValidationError]]:
     """Load Energy Cost with Tariff Station by Asset ID
 
      Fetches energy cost data in the company currency with tariff station for a specified asset within a
@@ -178,7 +182,7 @@ async def asyncio_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[Any, CostSamplesWithTariffStation, HTTPValidationError]]
+        Response[Union[Any, ApiCostSamplesWithTariffStationResponse, HTTPValidationError]]
     """
 
     kwargs = _get_kwargs(
@@ -195,10 +199,10 @@ async def asyncio_detailed(
 async def asyncio(
     asset: str,
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
     start: str,
     end: str,
-) -> Optional[Union[Any, CostSamplesWithTariffStation, HTTPValidationError]]:
+) -> Optional[Union[Any, ApiCostSamplesWithTariffStationResponse, HTTPValidationError]]:
     """Load Energy Cost with Tariff Station by Asset ID
 
      Fetches energy cost data in the company currency with tariff station for a specified asset within a
@@ -219,7 +223,7 @@ async def asyncio(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[Any, CostSamplesWithTariffStation, HTTPValidationError]
+        Union[Any, ApiCostSamplesWithTariffStationResponse, HTTPValidationError]
     """
 
     return (

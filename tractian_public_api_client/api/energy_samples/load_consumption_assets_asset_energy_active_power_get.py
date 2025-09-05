@@ -5,7 +5,7 @@ import httpx
 
 from ... import errors
 from ...client import AuthenticatedClient, Client
-from ...models.global_units_samples import GlobalUnitsSamples
+from ...models.api_global_units_samples_response import ApiGlobalUnitsSamplesResponse
 from ...models.http_validation_error import HTTPValidationError
 from ...types import UNSET, Response
 
@@ -35,9 +35,9 @@ def _get_kwargs(
 
 def _parse_response(
     *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[Union[Any, GlobalUnitsSamples, HTTPValidationError]]:
+) -> Optional[Union[Any, ApiGlobalUnitsSamplesResponse, HTTPValidationError]]:
     if response.status_code == 200:
-        response_200 = GlobalUnitsSamples.from_dict(response.json())
+        response_200 = ApiGlobalUnitsSamplesResponse.from_dict(response.json())
 
         return response_200
     if response.status_code == 204:
@@ -61,7 +61,7 @@ def _parse_response(
 
 def _build_response(
     *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Response[Union[Any, GlobalUnitsSamples, HTTPValidationError]]:
+) -> Response[Union[Any, ApiGlobalUnitsSamplesResponse, HTTPValidationError]]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -73,10 +73,10 @@ def _build_response(
 def sync_detailed(
     asset: str,
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
     start: str,
     end: str,
-) -> Response[Union[Any, GlobalUnitsSamples, HTTPValidationError]]:
+) -> Response[Union[Any, ApiGlobalUnitsSamplesResponse, HTTPValidationError]]:
     """Load Energy Active Power by Asset ID
 
      Fetches energy active power data (W - Watt) for a specified asset within a given date range. This
@@ -96,7 +96,7 @@ def sync_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[Any, GlobalUnitsSamples, HTTPValidationError]]
+        Response[Union[Any, ApiGlobalUnitsSamplesResponse, HTTPValidationError]]
     """
 
     kwargs = _get_kwargs(
@@ -115,10 +115,10 @@ def sync_detailed(
 def sync(
     asset: str,
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
     start: str,
     end: str,
-) -> Optional[Union[Any, GlobalUnitsSamples, HTTPValidationError]]:
+) -> Optional[Union[Any, ApiGlobalUnitsSamplesResponse, HTTPValidationError]]:
     """Load Energy Active Power by Asset ID
 
      Fetches energy active power data (W - Watt) for a specified asset within a given date range. This
@@ -138,7 +138,7 @@ def sync(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[Any, GlobalUnitsSamples, HTTPValidationError]
+        Union[Any, ApiGlobalUnitsSamplesResponse, HTTPValidationError]
     """
 
     return sync_detailed(
@@ -152,10 +152,10 @@ def sync(
 async def asyncio_detailed(
     asset: str,
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
     start: str,
     end: str,
-) -> Response[Union[Any, GlobalUnitsSamples, HTTPValidationError]]:
+) -> Response[Union[Any, ApiGlobalUnitsSamplesResponse, HTTPValidationError]]:
     """Load Energy Active Power by Asset ID
 
      Fetches energy active power data (W - Watt) for a specified asset within a given date range. This
@@ -175,7 +175,7 @@ async def asyncio_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[Any, GlobalUnitsSamples, HTTPValidationError]]
+        Response[Union[Any, ApiGlobalUnitsSamplesResponse, HTTPValidationError]]
     """
 
     kwargs = _get_kwargs(
@@ -192,10 +192,10 @@ async def asyncio_detailed(
 async def asyncio(
     asset: str,
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
     start: str,
     end: str,
-) -> Optional[Union[Any, GlobalUnitsSamples, HTTPValidationError]]:
+) -> Optional[Union[Any, ApiGlobalUnitsSamplesResponse, HTTPValidationError]]:
     """Load Energy Active Power by Asset ID
 
      Fetches energy active power data (W - Watt) for a specified asset within a given date range. This
@@ -215,7 +215,7 @@ async def asyncio(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[Any, GlobalUnitsSamples, HTTPValidationError]
+        Union[Any, ApiGlobalUnitsSamplesResponse, HTTPValidationError]
     """
 
     return (

@@ -7,7 +7,9 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
-    from ..models.activity_procedure_value import ActivityProcedureValue
+    from ..models.work_order_operation_procedure_value import (
+        WorkOrderOperationProcedureValue,
+    )
 
 
 T = TypeVar("T", bound="ActivityAlternativeValueMotor")
@@ -15,7 +17,7 @@ T = TypeVar("T", bound="ActivityAlternativeValueMotor")
 
 @_attrs_define
 class ActivityAlternativeValueMotor:
-    value: "ActivityProcedureValue"
+    value: "WorkOrderOperationProcedureValue"
     level_id: Union[None, Unset, str] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
@@ -42,10 +44,12 @@ class ActivityAlternativeValueMotor:
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.activity_procedure_value import ActivityProcedureValue
+        from ..models.work_order_operation_procedure_value import (
+            WorkOrderOperationProcedureValue,
+        )
 
         d = dict(src_dict)
-        value = ActivityProcedureValue.from_dict(d.pop("value"))
+        value = WorkOrderOperationProcedureValue.from_dict(d.pop("value"))
 
         def _parse_level_id(data: object) -> Union[None, Unset, str]:
             if data is None:

@@ -11,6 +11,7 @@ T = TypeVar("T", bound="WorkOrdersMotorRequestAPI")
 @_attrs_define
 class WorkOrdersMotorRequestAPI:
     title: str
+    company_id: str
     asset_id: Union[None, Unset, str] = UNSET
     location_id: Union[None, Unset, str] = UNSET
     status: Union[None, Unset, str] = UNSET
@@ -23,6 +24,8 @@ class WorkOrdersMotorRequestAPI:
 
     def to_dict(self) -> dict[str, Any]:
         title = self.title
+
+        company_id = self.company_id
 
         asset_id: Union[None, Unset, str]
         if isinstance(self.asset_id, Unset):
@@ -89,6 +92,7 @@ class WorkOrdersMotorRequestAPI:
         field_dict.update(
             {
                 "title": title,
+                "companyId": company_id,
             }
         )
         if asset_id is not UNSET:
@@ -116,6 +120,8 @@ class WorkOrdersMotorRequestAPI:
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
         title = d.pop("title")
+
+        company_id = d.pop("companyId")
 
         def _parse_asset_id(data: object) -> Union[None, Unset, str]:
             if data is None:
@@ -216,6 +222,7 @@ class WorkOrdersMotorRequestAPI:
 
         work_orders_motor_request_api = cls(
             title=title,
+            company_id=company_id,
             asset_id=asset_id,
             location_id=location_id,
             status=status,

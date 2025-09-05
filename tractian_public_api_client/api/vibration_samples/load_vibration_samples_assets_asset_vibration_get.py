@@ -5,8 +5,8 @@ import httpx
 
 from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...models.api_vibration_samples_response import ApiVibrationSamplesResponse
 from ...models.http_validation_error import HTTPValidationError
-from ...models.simplified_shockwave_samples_data import SimplifiedShockwaveSamplesData
 from ...types import UNSET, Response, Unset
 
 
@@ -41,9 +41,9 @@ def _get_kwargs(
 
 def _parse_response(
     *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[Union[Any, HTTPValidationError, SimplifiedShockwaveSamplesData]]:
+) -> Optional[Union[Any, ApiVibrationSamplesResponse, HTTPValidationError]]:
     if response.status_code == 200:
-        response_200 = SimplifiedShockwaveSamplesData.from_dict(response.json())
+        response_200 = ApiVibrationSamplesResponse.from_dict(response.json())
 
         return response_200
     if response.status_code == 204:
@@ -67,7 +67,7 @@ def _parse_response(
 
 def _build_response(
     *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Response[Union[Any, HTTPValidationError, SimplifiedShockwaveSamplesData]]:
+) -> Response[Union[Any, ApiVibrationSamplesResponse, HTTPValidationError]]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -79,12 +79,12 @@ def _build_response(
 def sync_detailed(
     asset: str,
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
     start: str,
     end: str,
     powered: Union[Unset, bool] = False,
     specialist: Union[Unset, bool] = False,
-) -> Response[Union[Any, HTTPValidationError, SimplifiedShockwaveSamplesData]]:
+) -> Response[Union[Any, ApiVibrationSamplesResponse, HTTPValidationError]]:
     """Retrieve Vibration Data for an Asset
 
      Fetches vibration data for a specified asset within a given date range. This endpoint provides
@@ -108,7 +108,7 @@ def sync_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[Any, HTTPValidationError, SimplifiedShockwaveSamplesData]]
+        Response[Union[Any, ApiVibrationSamplesResponse, HTTPValidationError]]
     """
 
     kwargs = _get_kwargs(
@@ -129,12 +129,12 @@ def sync_detailed(
 def sync(
     asset: str,
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
     start: str,
     end: str,
     powered: Union[Unset, bool] = False,
     specialist: Union[Unset, bool] = False,
-) -> Optional[Union[Any, HTTPValidationError, SimplifiedShockwaveSamplesData]]:
+) -> Optional[Union[Any, ApiVibrationSamplesResponse, HTTPValidationError]]:
     """Retrieve Vibration Data for an Asset
 
      Fetches vibration data for a specified asset within a given date range. This endpoint provides
@@ -158,7 +158,7 @@ def sync(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[Any, HTTPValidationError, SimplifiedShockwaveSamplesData]
+        Union[Any, ApiVibrationSamplesResponse, HTTPValidationError]
     """
 
     return sync_detailed(
@@ -174,12 +174,12 @@ def sync(
 async def asyncio_detailed(
     asset: str,
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
     start: str,
     end: str,
     powered: Union[Unset, bool] = False,
     specialist: Union[Unset, bool] = False,
-) -> Response[Union[Any, HTTPValidationError, SimplifiedShockwaveSamplesData]]:
+) -> Response[Union[Any, ApiVibrationSamplesResponse, HTTPValidationError]]:
     """Retrieve Vibration Data for an Asset
 
      Fetches vibration data for a specified asset within a given date range. This endpoint provides
@@ -203,7 +203,7 @@ async def asyncio_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[Any, HTTPValidationError, SimplifiedShockwaveSamplesData]]
+        Response[Union[Any, ApiVibrationSamplesResponse, HTTPValidationError]]
     """
 
     kwargs = _get_kwargs(
@@ -222,12 +222,12 @@ async def asyncio_detailed(
 async def asyncio(
     asset: str,
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
     start: str,
     end: str,
     powered: Union[Unset, bool] = False,
     specialist: Union[Unset, bool] = False,
-) -> Optional[Union[Any, HTTPValidationError, SimplifiedShockwaveSamplesData]]:
+) -> Optional[Union[Any, ApiVibrationSamplesResponse, HTTPValidationError]]:
     """Retrieve Vibration Data for an Asset
 
      Fetches vibration data for a specified asset within a given date range. This endpoint provides
@@ -251,7 +251,7 @@ async def asyncio(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[Any, HTTPValidationError, SimplifiedShockwaveSamplesData]
+        Union[Any, ApiVibrationSamplesResponse, HTTPValidationError]
     """
 
     return (

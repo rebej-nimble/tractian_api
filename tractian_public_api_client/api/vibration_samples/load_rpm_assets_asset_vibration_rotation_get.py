@@ -5,8 +5,8 @@ import httpx
 
 from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...models.api_rpm_samples_response import ApiRpmSamplesResponse
 from ...models.http_validation_error import HTTPValidationError
-from ...models.simplified_rpm_sample_data import SimplifiedRpmSampleData
 from ...types import UNSET, Response, Unset
 
 
@@ -38,9 +38,9 @@ def _get_kwargs(
 
 def _parse_response(
     *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[Union[Any, HTTPValidationError, SimplifiedRpmSampleData]]:
+) -> Optional[Union[Any, ApiRpmSamplesResponse, HTTPValidationError]]:
     if response.status_code == 200:
-        response_200 = SimplifiedRpmSampleData.from_dict(response.json())
+        response_200 = ApiRpmSamplesResponse.from_dict(response.json())
 
         return response_200
     if response.status_code == 204:
@@ -64,7 +64,7 @@ def _parse_response(
 
 def _build_response(
     *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Response[Union[Any, HTTPValidationError, SimplifiedRpmSampleData]]:
+) -> Response[Union[Any, ApiRpmSamplesResponse, HTTPValidationError]]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -76,11 +76,11 @@ def _build_response(
 def sync_detailed(
     asset: str,
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
     start: str,
     end: str,
     specialist: Union[Unset, bool] = False,
-) -> Response[Union[Any, HTTPValidationError, SimplifiedRpmSampleData]]:
+) -> Response[Union[Any, ApiRpmSamplesResponse, HTTPValidationError]]:
     """Retrieve RPM Data for an Asset
 
      Fetches Rotation samples on RPM (Rotations Per Minute) for a specified asset within a given date
@@ -102,7 +102,7 @@ def sync_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[Any, HTTPValidationError, SimplifiedRpmSampleData]]
+        Response[Union[Any, ApiRpmSamplesResponse, HTTPValidationError]]
     """
 
     kwargs = _get_kwargs(
@@ -122,11 +122,11 @@ def sync_detailed(
 def sync(
     asset: str,
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
     start: str,
     end: str,
     specialist: Union[Unset, bool] = False,
-) -> Optional[Union[Any, HTTPValidationError, SimplifiedRpmSampleData]]:
+) -> Optional[Union[Any, ApiRpmSamplesResponse, HTTPValidationError]]:
     """Retrieve RPM Data for an Asset
 
      Fetches Rotation samples on RPM (Rotations Per Minute) for a specified asset within a given date
@@ -148,7 +148,7 @@ def sync(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[Any, HTTPValidationError, SimplifiedRpmSampleData]
+        Union[Any, ApiRpmSamplesResponse, HTTPValidationError]
     """
 
     return sync_detailed(
@@ -163,11 +163,11 @@ def sync(
 async def asyncio_detailed(
     asset: str,
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
     start: str,
     end: str,
     specialist: Union[Unset, bool] = False,
-) -> Response[Union[Any, HTTPValidationError, SimplifiedRpmSampleData]]:
+) -> Response[Union[Any, ApiRpmSamplesResponse, HTTPValidationError]]:
     """Retrieve RPM Data for an Asset
 
      Fetches Rotation samples on RPM (Rotations Per Minute) for a specified asset within a given date
@@ -189,7 +189,7 @@ async def asyncio_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[Any, HTTPValidationError, SimplifiedRpmSampleData]]
+        Response[Union[Any, ApiRpmSamplesResponse, HTTPValidationError]]
     """
 
     kwargs = _get_kwargs(
@@ -207,11 +207,11 @@ async def asyncio_detailed(
 async def asyncio(
     asset: str,
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
     start: str,
     end: str,
     specialist: Union[Unset, bool] = False,
-) -> Optional[Union[Any, HTTPValidationError, SimplifiedRpmSampleData]]:
+) -> Optional[Union[Any, ApiRpmSamplesResponse, HTTPValidationError]]:
     """Retrieve RPM Data for an Asset
 
      Fetches Rotation samples on RPM (Rotations Per Minute) for a specified asset within a given date
@@ -233,7 +233,7 @@ async def asyncio(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[Any, HTTPValidationError, SimplifiedRpmSampleData]
+        Union[Any, ApiRpmSamplesResponse, HTTPValidationError]
     """
 
     return (

@@ -1,18 +1,115 @@
 """Contains all the data models used in inputs/outputs"""
 
 from .activity_alternative_value_motor import ActivityAlternativeValueMotor
-from .activity_procedure_field_option import ActivityProcedureFieldOption
-from .activity_procedure_value import ActivityProcedureValue
 from .add_asset_motor import AddAssetMotor
 from .add_asset_motor_attachment import AddAssetMotorAttachment
 from .add_asset_motor_attachment_file_convertion import (
     AddAssetMotorAttachmentFileConvertion,
 )
+from .add_purchase_requisition_supply_request import AddPurchaseRequisitionSupplyRequest
+from .add_transfer_request_supply_request import AddTransferRequestSupplyRequest
+from .api_category_motor_response import ApiCategoryMotorResponse
+from .api_consumption_samples_with_tariff_station_response import (
+    ApiConsumptionSamplesWithTariffStationResponse,
+)
+from .api_consumption_samples_without_tariff_station_response import (
+    ApiConsumptionSamplesWithoutTariffStationResponse,
+)
+from .api_cost_samples_with_tariff_station_response import (
+    ApiCostSamplesWithTariffStationResponse,
+)
+from .api_cost_samples_without_tariff_station_response import (
+    ApiCostSamplesWithoutTariffStationResponse,
+)
+from .api_demand_samples_without_tariff_station_response import (
+    ApiDemandSamplesWithoutTariffStationResponse,
+)
+from .api_disabled_location import ApiDisabledLocation
+from .api_global_units_samples_response import ApiGlobalUnitsSamplesResponse
+from .api_list_insights_response import ApiListInsightsResponse
+from .api_list_inspections_fields import ApiListInspectionsFields
+from .api_list_inspections_level import ApiListInspectionsLevel
+from .api_list_inspections_option import ApiListInspectionsOption
+from .api_list_inspections_procedure import ApiListInspectionsProcedure
+from .api_list_inspections_response import ApiListInspectionsResponse
+from .api_locations import ApiLocations
+from .api_locations_put_request import ApiLocationsPutRequest
+from .api_locations_request import ApiLocationsRequest
+from .api_locations_request_deleted import ApiLocationsRequestDeleted
+from .api_metric_value import ApiMetricValue
+from .api_metric_value_motor import ApiMetricValueMotor
+from .api_metric_value_request import ApiMetricValueRequest
+from .api_metrics_motor_request import ApiMetricsMotorRequest
+from .api_reliability_event_insight_response import ApiReliabilityEventInsightResponse
+from .api_reliability_event_response import ApiReliabilityEventResponse
+from .api_rpm_samples_response import ApiRpmSamplesResponse
+from .api_supply_attachment import ApiSupplyAttachment
+from .api_supply_deleted import ApiSupplyDeleted
+from .api_supply_image_conversion import ApiSupplyImageConversion
 from .api_supply_inventory_adjustment_request import ApiSupplyInventoryAdjustmentRequest
+from .api_supply_inventory_adjustment_response import (
+    ApiSupplyInventoryAdjustmentResponse,
+)
 from .api_supply_inventory_patch_request import ApiSupplyInventoryPatchRequest
 from .api_supply_item_category import ApiSupplyItemCategory
 from .api_supply_item_category_request import ApiSupplyItemCategoryRequest
-from .api_supply_item_storage_response import ApiSupplyItemStorageResponse
+from .api_supply_item_reservation_request import ApiSupplyItemReservationRequest
+from .api_supply_item_reservation_response import ApiSupplyItemReservationResponse
+from .api_supply_item_storage_inbound_batch import ApiSupplyItemStorageInboundBatch
+from .api_supply_measurement_unit_patch_request import (
+    ApiSupplyMeasurementUnitPatchRequest,
+)
+from .api_supply_measurement_unit_put_request import ApiSupplyMeasurementUnitPutRequest
+from .api_supply_measurement_unit_request import ApiSupplyMeasurementUnitRequest
+from .api_supply_new_contract import ApiSupplyNewContract
+from .api_supply_other_costs import ApiSupplyOtherCosts
+from .api_supply_purchase_order import ApiSupplyPurchaseOrder
+from .api_supply_purchase_order_item import ApiSupplyPurchaseOrderItem
+from .api_supply_purchase_order_request import ApiSupplyPurchaseOrderRequest
+from .api_supply_purchase_order_status import ApiSupplyPurchaseOrderStatus
+from .api_supply_purchase_request_action import ApiSupplyPurchaseRequestAction
+from .api_supply_purchase_requisition_item import ApiSupplyPurchaseRequisitionItem
+from .api_supply_purchase_requisition_item_request import (
+    ApiSupplyPurchaseRequisitionItemRequest,
+)
+from .api_supply_purchase_requisition_put_request import (
+    ApiSupplyPurchaseRequisitionPutRequest,
+)
+from .api_supply_purchase_requisition_request import ApiSupplyPurchaseRequisitionRequest
+from .api_supply_purchase_requisition_response import (
+    ApiSupplyPurchaseRequisitionResponse,
+)
+from .api_supply_reject_purchase_request_action import (
+    ApiSupplyRejectPurchaseRequestAction,
+)
+from .api_supply_reservation_patch_request import ApiSupplyReservationPatchRequest
+from .api_supply_reservation_put_request import ApiSupplyReservationPutRequest
+from .api_supply_reservation_request import ApiSupplyReservationRequest
+from .api_supply_storage_location_code_request import (
+    ApiSupplyStorageLocationCodeRequest,
+)
+from .api_supply_storage_location_code_response import (
+    ApiSupplyStorageLocationCodeResponse,
+)
+from .api_supply_storage_location_deleted import ApiSupplyStorageLocationDeleted
+from .api_supply_storage_location_disabled import ApiSupplyStorageLocationDisabled
+from .api_supply_storage_location_request import ApiSupplyStorageLocationRequest
+from .api_supply_storage_location_response import ApiSupplyStorageLocationResponse
+from .api_supply_supplier_address_coordinates import ApiSupplySupplierAddressCoordinates
+from .api_supply_supplier_attachment import ApiSupplySupplierAttachment
+from .api_supply_supplier_contract import ApiSupplySupplierContract
+from .api_supply_supplier_deleted import ApiSupplySupplierDeleted
+from .api_supply_supplier_image import ApiSupplySupplierImage
+from .api_supply_transfer_request_item_status import ApiSupplyTransferRequestItemStatus
+from .api_supply_transfer_requests_put_request import (
+    ApiSupplyTransferRequestsPutRequest,
+)
+from .api_supply_transfer_requests_request import ApiSupplyTransferRequestsRequest
+from .api_supply_work_order_item import ApiSupplyWorkOrderItem
+from .api_user_deleted import ApiUserDeleted
+from .api_user_request import ApiUserRequest
+from .api_user_team import ApiUserTeam
+from .api_vibration_samples_response import ApiVibrationSamplesResponse
 from .asset import Asset
 from .asset_attachment_motor import AssetAttachmentMotor
 from .asset_components_motor import AssetComponentsMotor
@@ -26,20 +123,19 @@ from .balance import Balance
 from .batch import Batch
 from .bearing_motor import BearingMotor
 from .bearing_motor_fault_frequencies_type_0 import BearingMotorFaultFrequenciesType0
+from .bonsai_asset_tree import BonsaiAssetTree
+from .bonsai_child import BonsaiChild
+from .bonsai_parent import BonsaiParent
+from .bonsai_value import BonsaiValue
 from .boolean_custom_field import BooleanCustomField
 from .category_other_costs import CategoryOtherCosts
 from .check_list_custom_field import CheckListCustomField
-from .checklist import Checklist
 from .code import Code
 from .code_type import CodeType
 from .comments_motor import CommentsMotor
 from .components_motor import ComponentsMotor
-from .consumption_samples_with_tariff_station import ConsumptionSamplesWithTariffStation
-from .consumption_samples_without_tariff_station import (
-    ConsumptionSamplesWithoutTariffStation,
-)
-from .cost_samples_with_tariff_station import CostSamplesWithTariffStation
-from .cost_samples_without_tariff_station import CostSamplesWithoutTariffStation
+from .cost_center import CostCenter
+from .criticality_values_response import CriticalityValuesResponse
 from .currency_custom_field import CurrencyCustomField
 from .current_review_cycle_motor import CurrentReviewCycleMotor
 from .date_custom_field import DateCustomField
@@ -56,29 +152,38 @@ from .entity_custom_field_value_type_7_item import EntityCustomFieldValueType7It
 from .entity_custom_field_value_type_8 import EntityCustomFieldValueType8
 from .entity_custom_field_value_type_9 import EntityCustomFieldValueType9
 from .entity_custom_field_value_type_10 import EntityCustomFieldValueType10
-from .event_cerberus import EventCerberus
 from .event_type import EventType
 from .feedback_request_user_motor import FeedbackRequestUserMotor
 from .feedback_requests_motor import FeedbackRequestsMotor
-from .fields_motor import FieldsMotor
 from .file_motor import FileMotor
 from .fix_status import FixStatus
+from .frequency_model import FrequencyModel
+from .frequency_model_request import FrequencyModelRequest
+from .frequency_type import FrequencyType
 from .generated_workorder import GeneratedWorkorder
-from .global_units_samples import GlobalUnitsSamples
-from .heading import Heading
+from .head_values_response import HeadValuesResponse
 from .http_validation_error import HTTPValidationError
 from .identified_asset_failures import IdentifiedAssetFailures
 from .inbound_batch import InboundBatch
-from .insight_cerberus import InsightCerberus
+from .insight_event_response import InsightEventResponse
 from .insight_status import InsightStatus
-from .inspection_custom import InspectionCustom
-from .inspection_list import InspectionList
 from .inspection_motor import InspectionMotor
+from .inspection_procedure_empty_value_motor import InspectionProcedureEmptyValueMotor
+from .inspection_procedure_field_alternative_value_motor import (
+    InspectionProcedureFieldAlternativeValueMotor,
+)
+from .inspection_procedure_field_motor import InspectionProcedureFieldMotor
+from .inspection_procedure_motor import InspectionProcedureMotor
+from .inspection_procedure_option_value import InspectionProcedureOptionValue
+from .inspection_procedure_value_motor import InspectionProcedureValueMotor
 from .inspection_status import InspectionStatus
 from .inventory_adjustment_position_supply_request import (
     InventoryAdjustmentPositionSupplyRequest,
 )
 from .inventory_adjustment_type_enum import InventoryAdjustmentTypeEnum
+from .inventory_adjustment_updated_balance_supply_response import (
+    InventoryAdjustmentUpdatedBalanceSupplyResponse,
+)
 from .inventory_adjustments_inbound_batch_supply_request import (
     InventoryAdjustmentsInboundBatchSupplyRequest,
 )
@@ -103,28 +208,58 @@ from .item_reservation_request_api import ItemReservationRequestAPI
 from .item_reservation_request_selected_batches_api import (
     ItemReservationRequestSelectedBatchesAPI,
 )
+from .item_reservation_status_enum_supply import ItemReservationStatusEnumSupply
 from .item_reservation_update_api import ItemReservationUpdateAPI
+from .last_read_metric_motor import LastReadMetricMotor
 from .level_motor import LevelMotor
+from .load_insights_info_by_id_insights_insight_id_get_language import (
+    LoadInsightsInfoByIdInsightsInsightIdGetLanguage,
+)
+from .load_insights_info_by_id_insights_insight_id_get_layout_type import (
+    LoadInsightsInfoByIdInsightsInsightIdGetLayoutType,
+)
+from .load_requests_by_company_id_companies_company_id_requests_get_filter_type_0 import (
+    LoadRequestsByCompanyIdCompaniesCompanyIdRequestsGetFilterType0,
+)
+from .load_requests_by_company_id_companies_company_id_requests_get_load_custom_fields_type_0 import (
+    LoadRequestsByCompanyIdCompaniesCompanyIdRequestsGetLoadCustomFieldsType0,
+)
+from .load_workorder_by_company_id_companies_company_id_workorders_get_filter_type_0 import (
+    LoadWorkorderByCompanyIdCompaniesCompanyIdWorkordersGetFilterType0,
+)
 from .location import Location
 from .material_type import MaterialType
 from .measurement_unit import MeasurementUnit
-from .metrics import Metrics
 from .metrics_field_values import MetricsFieldValues
+from .metrics_field_values_motor import MetricsFieldValuesMotor
 from .new_inbound_batch_supply_request import NewInboundBatchSupplyRequest
 from .number_custom_field import NumberCustomField
+from .offline_metric import OfflineMetric
+from .online_metric import OnlineMetric
+from .option import Option
 from .other_cost import OtherCost
+from .pagination_api_category_motor_response import PaginationApiCategoryMotorResponse
+from .pagination_api_list_insights_response import PaginationApiListInsightsResponse
+from .pagination_api_reliability_event_response import (
+    PaginationApiReliabilityEventResponse,
+)
 from .pagination_api_supply_item_category_response import (
     PaginationApiSupplyItemCategoryResponse,
 )
-from .pagination_api_supply_item_storage_response import (
-    PaginationApiSupplyItemStorageResponse,
+from .pagination_api_supply_purchase_order import PaginationApiSupplyPurchaseOrder
+from .pagination_api_supply_purchase_requisition_response import (
+    PaginationApiSupplyPurchaseRequisitionResponse,
+)
+from .pagination_api_supply_storage_location_response import (
+    PaginationApiSupplyStorageLocationResponse,
 )
 from .pagination_dto_asset_motor import PaginationDTOAssetMotor
-from .pagination_event_cerberus import PaginationEventCerberus
-from .pagination_insight_cerberus import PaginationInsightCerberus
 from .pagination_item_reservation_motor import PaginationItemReservationMotor
 from .pagination_requests_motor import PaginationRequestsMotor
 from .pagination_work_order_operation_motor import PaginationWorkOrderOperationMotor
+from .pagination_work_order_priorities_motor_response_api import (
+    PaginationWorkOrderPrioritiesMotorResponseAPI,
+)
 from .pagination_work_orders_motor import PaginationWorkOrdersMotor
 from .pagination_work_orders_others_costs_motor import (
     PaginationWorkOrdersOthersCostsMotor,
@@ -141,8 +276,13 @@ from .parent_work_order_operation_procedure_request_motor import (
     ParentWorkOrderOperationProcedureRequestMotor,
 )
 from .phase_values import PhaseValues
-from .procedure_motor import ProcedureMotor
+from .priority_motor import PriorityMotor
+from .priority_motor_deleted import PriorityMotorDeleted
+from .priority_motor_disabled import PriorityMotorDisabled
 from .purchase_orders import PurchaseOrders
+from .purchase_requisition_priority import PurchaseRequisitionPriority
+from .purchase_requisition_supply_priority import PurchaseRequisitionSupplyPriority
+from .purchase_requisition_supply_status import PurchaseRequisitionSupplyStatus
 from .request import Request
 from .request_template_categories_motor import RequestTemplateCategoriesMotor
 from .requests_motor import RequestsMotor
@@ -152,14 +292,15 @@ from .requests_template_identified_asset_failures import (
     RequestsTemplateIdentifiedAssetFailures,
 )
 from .selection_list_custom_field import SelectionListCustomField
-from .simplified_rpm_sample_data import SimplifiedRpmSampleData
-from .simplified_shockwave_samples_data import SimplifiedShockwaveSamplesData
-from .simplified_wave_data import SimplifiedWaveData
+from .sensor_metric import SensorMetric
+from .simplified_prescription import SimplifiedPrescription
 from .specification_motor import SpecificationMotor
 from .specifications import Specifications
 from .stock_level import StockLevel
 from .storage_position import StoragePosition
 from .summary import Summary
+from .supplier import Supplier
+from .supplier_address import SupplierAddress
 from .supply_abc_classification import SupplyAbcClassification
 from .supply_category_inventory_item import SupplyCategoryInventoryItem
 from .supply_code_request import SupplyCodeRequest
@@ -179,6 +320,8 @@ from .template_request_motor_attachment import TemplateRequestMotorAttachment
 from .text_custom_field import TextCustomField
 from .time_spent_cost import TimeSpentCost
 from .total_cost import TotalCost
+from .transfer_request import TransferRequest
+from .transfer_request_item import TransferRequestItem
 from .update_events_tractian_request import UpdateEventsTractianRequest
 from .update_insight_status_tractian_request import UpdateInsightStatusTractianRequest
 from .update_inspection_procedure_tractian_request import (
@@ -187,8 +330,17 @@ from .update_inspection_procedure_tractian_request import (
 from .update_inspection_status_tractian_request import (
     UpdateInspectionStatusTractianRequest,
 )
+from .update_purchase_requisition_supply_request import (
+    UpdatePurchaseRequisitionSupplyRequest,
+)
+from .user import User
 from .validation_error import ValidationError
+from .values_response import ValuesResponse
+from .wave_data import WaveData
+from .withdrawn_batch import WithdrawnBatch
+from .withdrawn_position import WithdrawnPosition
 from .work_order_asset_motor import WorkOrderAssetMotor
+from .work_order_assigned_teams import WorkOrderAssignedTeams
 from .work_order_completed_by_user import WorkOrderCompletedByUser
 from .work_order_deleted_info import WorkOrderDeletedInfo
 from .work_order_file_value_motor import WorkOrderFileValueMotor
@@ -199,13 +351,26 @@ from .work_order_operation_inventory import WorkOrderOperationInventory
 from .work_order_operation_inventory_inventory import (
     WorkOrderOperationInventoryInventory,
 )
+from .work_order_operation_inventory_reservation import (
+    WorkOrderOperationInventoryReservation,
+)
 from .work_order_operation_inventory_selected_batch import (
     WorkOrderOperationInventorySelectedBatch,
 )
 from .work_order_operation_motor import WorkOrderOperationMotor
+from .work_order_operation_procedure_empty_value_motor import (
+    WorkOrderOperationProcedureEmptyValueMotor,
+)
+from .work_order_operation_procedure_field_option import (
+    WorkOrderOperationProcedureFieldOption,
+)
+from .work_order_operation_procedure_value import WorkOrderOperationProcedureValue
 from .work_order_operations import WorkOrderOperations
 from .work_order_operations_procedure import WorkOrderOperationsProcedure
 from .work_order_operations_procedure_fields import WorkOrderOperationsProcedureFields
+from .work_order_priorities_motor_response_api import (
+    WorkOrderPrioritiesMotorResponseAPI,
+)
 from .work_order_procedure_alternative_value_motor import (
     WorkOrderProcedureAlternativeValueMotor,
 )
@@ -223,21 +388,89 @@ from .work_orders_others_costs_motor_request_api import (
     WorkOrdersOthersCostsMotorRequestAPI,
 )
 from .workorder_operation_procedure import WorkorderOperationProcedure
-from .yes_no_custom import YesNoCustom
-from .yes_or_no_custom import YesOrNoCustom
+from .workorder_operation_procedure_field import WorkorderOperationProcedureField
 
 __all__ = (
     "ActivityAlternativeValueMotor",
-    "ActivityProcedureFieldOption",
-    "ActivityProcedureValue",
     "AddAssetMotor",
     "AddAssetMotorAttachment",
     "AddAssetMotorAttachmentFileConvertion",
+    "AddPurchaseRequisitionSupplyRequest",
+    "AddTransferRequestSupplyRequest",
+    "ApiCategoryMotorResponse",
+    "ApiConsumptionSamplesWithoutTariffStationResponse",
+    "ApiConsumptionSamplesWithTariffStationResponse",
+    "ApiCostSamplesWithoutTariffStationResponse",
+    "ApiCostSamplesWithTariffStationResponse",
+    "ApiDemandSamplesWithoutTariffStationResponse",
+    "ApiDisabledLocation",
+    "ApiGlobalUnitsSamplesResponse",
+    "ApiListInsightsResponse",
+    "ApiListInspectionsFields",
+    "ApiListInspectionsLevel",
+    "ApiListInspectionsOption",
+    "ApiListInspectionsProcedure",
+    "ApiListInspectionsResponse",
+    "ApiLocations",
+    "ApiLocationsPutRequest",
+    "ApiLocationsRequest",
+    "ApiLocationsRequestDeleted",
+    "ApiMetricsMotorRequest",
+    "ApiMetricValue",
+    "ApiMetricValueMotor",
+    "ApiMetricValueRequest",
+    "ApiReliabilityEventInsightResponse",
+    "ApiReliabilityEventResponse",
+    "ApiRpmSamplesResponse",
+    "ApiSupplyAttachment",
+    "ApiSupplyDeleted",
+    "ApiSupplyImageConversion",
     "ApiSupplyInventoryAdjustmentRequest",
+    "ApiSupplyInventoryAdjustmentResponse",
     "ApiSupplyInventoryPatchRequest",
     "ApiSupplyItemCategory",
     "ApiSupplyItemCategoryRequest",
-    "ApiSupplyItemStorageResponse",
+    "ApiSupplyItemReservationRequest",
+    "ApiSupplyItemReservationResponse",
+    "ApiSupplyItemStorageInboundBatch",
+    "ApiSupplyMeasurementUnitPatchRequest",
+    "ApiSupplyMeasurementUnitPutRequest",
+    "ApiSupplyMeasurementUnitRequest",
+    "ApiSupplyNewContract",
+    "ApiSupplyOtherCosts",
+    "ApiSupplyPurchaseOrder",
+    "ApiSupplyPurchaseOrderItem",
+    "ApiSupplyPurchaseOrderRequest",
+    "ApiSupplyPurchaseOrderStatus",
+    "ApiSupplyPurchaseRequestAction",
+    "ApiSupplyPurchaseRequisitionItem",
+    "ApiSupplyPurchaseRequisitionItemRequest",
+    "ApiSupplyPurchaseRequisitionPutRequest",
+    "ApiSupplyPurchaseRequisitionRequest",
+    "ApiSupplyPurchaseRequisitionResponse",
+    "ApiSupplyRejectPurchaseRequestAction",
+    "ApiSupplyReservationPatchRequest",
+    "ApiSupplyReservationPutRequest",
+    "ApiSupplyReservationRequest",
+    "ApiSupplyStorageLocationCodeRequest",
+    "ApiSupplyStorageLocationCodeResponse",
+    "ApiSupplyStorageLocationDeleted",
+    "ApiSupplyStorageLocationDisabled",
+    "ApiSupplyStorageLocationRequest",
+    "ApiSupplyStorageLocationResponse",
+    "ApiSupplySupplierAddressCoordinates",
+    "ApiSupplySupplierAttachment",
+    "ApiSupplySupplierContract",
+    "ApiSupplySupplierDeleted",
+    "ApiSupplySupplierImage",
+    "ApiSupplyTransferRequestItemStatus",
+    "ApiSupplyTransferRequestsPutRequest",
+    "ApiSupplyTransferRequestsRequest",
+    "ApiSupplyWorkOrderItem",
+    "ApiUserDeleted",
+    "ApiUserRequest",
+    "ApiUserTeam",
+    "ApiVibrationSamplesResponse",
     "Asset",
     "AssetAttachmentMotor",
     "AssetComponentsMotor",
@@ -251,18 +484,19 @@ __all__ = (
     "Batch",
     "BearingMotor",
     "BearingMotorFaultFrequenciesType0",
+    "BonsaiAssetTree",
+    "BonsaiChild",
+    "BonsaiParent",
+    "BonsaiValue",
     "BooleanCustomField",
     "CategoryOtherCosts",
-    "Checklist",
     "CheckListCustomField",
     "Code",
     "CodeType",
     "CommentsMotor",
     "ComponentsMotor",
-    "ConsumptionSamplesWithoutTariffStation",
-    "ConsumptionSamplesWithTariffStation",
-    "CostSamplesWithoutTariffStation",
-    "CostSamplesWithTariffStation",
+    "CostCenter",
+    "CriticalityValuesResponse",
     "CurrencyCustomField",
     "CurrentReviewCycleMotor",
     "DateCustomField",
@@ -279,28 +513,33 @@ __all__ = (
     "EntityCustomFieldValueType7Item",
     "EntityCustomFieldValueType8",
     "EntityCustomFieldValueType9",
-    "EventCerberus",
     "EventType",
     "FeedbackRequestsMotor",
     "FeedbackRequestUserMotor",
-    "FieldsMotor",
     "FileMotor",
     "FixStatus",
+    "FrequencyModel",
+    "FrequencyModelRequest",
+    "FrequencyType",
     "GeneratedWorkorder",
-    "GlobalUnitsSamples",
-    "Heading",
+    "HeadValuesResponse",
     "HTTPValidationError",
     "IdentifiedAssetFailures",
     "InboundBatch",
-    "InsightCerberus",
+    "InsightEventResponse",
     "InsightStatus",
-    "InspectionCustom",
-    "InspectionList",
     "InspectionMotor",
+    "InspectionProcedureEmptyValueMotor",
+    "InspectionProcedureFieldAlternativeValueMotor",
+    "InspectionProcedureFieldMotor",
+    "InspectionProcedureMotor",
+    "InspectionProcedureOptionValue",
+    "InspectionProcedureValueMotor",
     "InspectionStatus",
     "InventoryAdjustmentPositionSupplyRequest",
     "InventoryAdjustmentsInboundBatchSupplyRequest",
     "InventoryAdjustmentTypeEnum",
+    "InventoryAdjustmentUpdatedBalanceSupplyResponse",
     "InventoryItemsCost",
     "InventoryMongoDB",
     "InventoryMongoDBAsset",
@@ -318,24 +557,38 @@ __all__ = (
     "ItemReservationMotorSelectedBatch",
     "ItemReservationRequestAPI",
     "ItemReservationRequestSelectedBatchesAPI",
+    "ItemReservationStatusEnumSupply",
     "ItemReservationUpdateAPI",
+    "LastReadMetricMotor",
     "LevelMotor",
+    "LoadInsightsInfoByIdInsightsInsightIdGetLanguage",
+    "LoadInsightsInfoByIdInsightsInsightIdGetLayoutType",
+    "LoadRequestsByCompanyIdCompaniesCompanyIdRequestsGetFilterType0",
+    "LoadRequestsByCompanyIdCompaniesCompanyIdRequestsGetLoadCustomFieldsType0",
+    "LoadWorkorderByCompanyIdCompaniesCompanyIdWorkordersGetFilterType0",
     "Location",
     "MaterialType",
     "MeasurementUnit",
-    "Metrics",
     "MetricsFieldValues",
+    "MetricsFieldValuesMotor",
     "NewInboundBatchSupplyRequest",
     "NumberCustomField",
+    "OfflineMetric",
+    "OnlineMetric",
+    "Option",
     "OtherCost",
+    "PaginationApiCategoryMotorResponse",
+    "PaginationApiListInsightsResponse",
+    "PaginationApiReliabilityEventResponse",
     "PaginationApiSupplyItemCategoryResponse",
-    "PaginationApiSupplyItemStorageResponse",
+    "PaginationApiSupplyPurchaseOrder",
+    "PaginationApiSupplyPurchaseRequisitionResponse",
+    "PaginationApiSupplyStorageLocationResponse",
     "PaginationDTOAssetMotor",
-    "PaginationEventCerberus",
-    "PaginationInsightCerberus",
     "PaginationItemReservationMotor",
     "PaginationRequestsMotor",
     "PaginationWorkOrderOperationMotor",
+    "PaginationWorkOrderPrioritiesMotorResponseAPI",
     "PaginationWorkOrdersMotor",
     "PaginationWorkOrdersOthersCostsMotor",
     "ParentInfoRequestMotor",
@@ -344,8 +597,13 @@ __all__ = (
     "ParentWorkOrderOperationProcedureFieldsLevels",
     "ParentWorkOrderOperationProcedureRequestMotor",
     "PhaseValues",
-    "ProcedureMotor",
+    "PriorityMotor",
+    "PriorityMotorDeleted",
+    "PriorityMotorDisabled",
     "PurchaseOrders",
+    "PurchaseRequisitionPriority",
+    "PurchaseRequisitionSupplyPriority",
+    "PurchaseRequisitionSupplyStatus",
     "Request",
     "RequestsMotor",
     "RequestsTemplate",
@@ -353,14 +611,15 @@ __all__ = (
     "RequestsTemplateIdentifiedAssetFailures",
     "RequestTemplateCategoriesMotor",
     "SelectionListCustomField",
-    "SimplifiedRpmSampleData",
-    "SimplifiedShockwaveSamplesData",
-    "SimplifiedWaveData",
+    "SensorMetric",
+    "SimplifiedPrescription",
     "SpecificationMotor",
     "Specifications",
     "StockLevel",
     "StoragePosition",
     "Summary",
+    "Supplier",
+    "SupplierAddress",
     "SupplyAbcClassification",
     "SupplyCategoryInventoryItem",
     "SupplyCodeRequest",
@@ -378,12 +637,21 @@ __all__ = (
     "TextCustomField",
     "TimeSpentCost",
     "TotalCost",
+    "TransferRequest",
+    "TransferRequestItem",
     "UpdateEventsTractianRequest",
     "UpdateInsightStatusTractianRequest",
     "UpdateInspectionProcedureTractianRequest",
     "UpdateInspectionStatusTractianRequest",
+    "UpdatePurchaseRequisitionSupplyRequest",
+    "User",
     "ValidationError",
+    "ValuesResponse",
+    "WaveData",
+    "WithdrawnBatch",
+    "WithdrawnPosition",
     "WorkOrderAssetMotor",
+    "WorkOrderAssignedTeams",
     "WorkOrderCompletedByUser",
     "WorkOrderDeletedInfo",
     "WorkOrderFileValueMotor",
@@ -392,12 +660,18 @@ __all__ = (
     "WorkOrderOperationAssetMotor",
     "WorkOrderOperationInventory",
     "WorkOrderOperationInventoryInventory",
+    "WorkOrderOperationInventoryReservation",
     "WorkOrderOperationInventorySelectedBatch",
     "WorkOrderOperationMotor",
     "WorkorderOperationProcedure",
+    "WorkOrderOperationProcedureEmptyValueMotor",
+    "WorkorderOperationProcedureField",
+    "WorkOrderOperationProcedureFieldOption",
+    "WorkOrderOperationProcedureValue",
     "WorkOrderOperations",
     "WorkOrderOperationsProcedure",
     "WorkOrderOperationsProcedureFields",
+    "WorkOrderPrioritiesMotorResponseAPI",
     "WorkOrderProcedureAlternativeValueMotor",
     "WorkOrderProcedureEmptyValueMotor",
     "WorkOrderProcedureFields",
@@ -410,6 +684,4 @@ __all__ = (
     "WorkOrdersOthersCostsMotor",
     "WorkOrdersOthersCostsMotorRequestAPI",
     "WorkOrderTimers",
-    "YesNoCustom",
-    "YesOrNoCustom",
 )

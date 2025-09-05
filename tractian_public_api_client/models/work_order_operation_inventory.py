@@ -10,6 +10,9 @@ if TYPE_CHECKING:
     from ..models.work_order_operation_inventory_inventory import (
         WorkOrderOperationInventoryInventory,
     )
+    from ..models.work_order_operation_inventory_reservation import (
+        WorkOrderOperationInventoryReservation,
+    )
     from ..models.work_order_operation_inventory_selected_batch import (
         WorkOrderOperationInventorySelectedBatch,
     )
@@ -27,9 +30,14 @@ class WorkOrderOperationInventory:
     selected_batches: Union[
         None, Unset, list["WorkOrderOperationInventorySelectedBatch"]
     ] = UNSET
+    reservation: Union["WorkOrderOperationInventoryReservation", None, Unset] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
+        from ..models.work_order_operation_inventory_reservation import (
+            WorkOrderOperationInventoryReservation,
+        )
+
         quantity = self.quantity
 
         work_order_operation_id = self.work_order_operation_id
@@ -52,6 +60,14 @@ class WorkOrderOperationInventory:
         else:
             selected_batches = self.selected_batches
 
+        reservation: Union[None, Unset, dict[str, Any]]
+        if isinstance(self.reservation, Unset):
+            reservation = UNSET
+        elif isinstance(self.reservation, WorkOrderOperationInventoryReservation):
+            reservation = self.reservation.to_dict()
+        else:
+            reservation = self.reservation
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update(
@@ -64,6 +80,8 @@ class WorkOrderOperationInventory:
         )
         if selected_batches is not UNSET:
             field_dict["selectedBatches"] = selected_batches
+        if reservation is not UNSET:
+            field_dict["reservation"] = reservation
 
         return field_dict
 
@@ -71,6 +89,9 @@ class WorkOrderOperationInventory:
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.work_order_operation_inventory_inventory import (
             WorkOrderOperationInventoryInventory,
+        )
+        from ..models.work_order_operation_inventory_reservation import (
+            WorkOrderOperationInventoryReservation,
         )
         from ..models.work_order_operation_inventory_selected_batch import (
             WorkOrderOperationInventorySelectedBatch,
@@ -116,12 +137,36 @@ class WorkOrderOperationInventory:
 
         selected_batches = _parse_selected_batches(d.pop("selectedBatches", UNSET))
 
+        def _parse_reservation(
+            data: object,
+        ) -> Union["WorkOrderOperationInventoryReservation", None, Unset]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                reservation_type_0 = WorkOrderOperationInventoryReservation.from_dict(
+                    data
+                )
+
+                return reservation_type_0
+            except:  # noqa: E722
+                pass
+            return cast(
+                Union["WorkOrderOperationInventoryReservation", None, Unset], data
+            )
+
+        reservation = _parse_reservation(d.pop("reservation", UNSET))
+
         work_order_operation_inventory = cls(
             quantity=quantity,
             work_order_operation_id=work_order_operation_id,
             reservation_id=reservation_id,
             inventory=inventory,
             selected_batches=selected_batches,
+            reservation=reservation,
         )
 
         work_order_operation_inventory.additional_properties = d

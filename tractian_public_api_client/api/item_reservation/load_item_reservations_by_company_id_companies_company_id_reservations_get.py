@@ -96,7 +96,7 @@ def _build_response(
 def sync_detailed(
     company_id: str,
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
     page: Union[Unset, int] = 1,
     limit: Union[Unset, int] = 10,
     number: Union[None, Unset, int] = UNSET,
@@ -105,6 +105,10 @@ def sync_detailed(
     status: Union[None, Unset, str] = UNSET,
 ) -> Response[Union[HTTPValidationError, PaginationItemReservationMotor]]:
     """Load Item Reservations By Company Id
+
+     **If your company already use Supply Module you must use the Supply routes.**
+
+    This endpoint loads item reservations by company ID with filtering support.
 
     Args:
         company_id (str): company id
@@ -143,7 +147,7 @@ def sync_detailed(
 def sync(
     company_id: str,
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
     page: Union[Unset, int] = 1,
     limit: Union[Unset, int] = 10,
     number: Union[None, Unset, int] = UNSET,
@@ -152,6 +156,10 @@ def sync(
     status: Union[None, Unset, str] = UNSET,
 ) -> Optional[Union[HTTPValidationError, PaginationItemReservationMotor]]:
     """Load Item Reservations By Company Id
+
+     **If your company already use Supply Module you must use the Supply routes.**
+
+    This endpoint loads item reservations by company ID with filtering support.
 
     Args:
         company_id (str): company id
@@ -185,7 +193,7 @@ def sync(
 async def asyncio_detailed(
     company_id: str,
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
     page: Union[Unset, int] = 1,
     limit: Union[Unset, int] = 10,
     number: Union[None, Unset, int] = UNSET,
@@ -194,6 +202,10 @@ async def asyncio_detailed(
     status: Union[None, Unset, str] = UNSET,
 ) -> Response[Union[HTTPValidationError, PaginationItemReservationMotor]]:
     """Load Item Reservations By Company Id
+
+     **If your company already use Supply Module you must use the Supply routes.**
+
+    This endpoint loads item reservations by company ID with filtering support.
 
     Args:
         company_id (str): company id
@@ -230,7 +242,7 @@ async def asyncio_detailed(
 async def asyncio(
     company_id: str,
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
     page: Union[Unset, int] = 1,
     limit: Union[Unset, int] = 10,
     number: Union[None, Unset, int] = UNSET,
@@ -239,6 +251,10 @@ async def asyncio(
     status: Union[None, Unset, str] = UNSET,
 ) -> Optional[Union[HTTPValidationError, PaginationItemReservationMotor]]:
     """Load Item Reservations By Company Id
+
+     **If your company already use Supply Module you must use the Supply routes.**
+
+    This endpoint loads item reservations by company ID with filtering support.
 
     Args:
         company_id (str): company id

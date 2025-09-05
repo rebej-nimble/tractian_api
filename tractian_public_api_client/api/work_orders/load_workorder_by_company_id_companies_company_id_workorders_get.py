@@ -6,6 +6,9 @@ import httpx
 from ... import errors
 from ...client import AuthenticatedClient, Client
 from ...models.http_validation_error import HTTPValidationError
+from ...models.load_workorder_by_company_id_companies_company_id_workorders_get_filter_type_0 import (
+    LoadWorkorderByCompanyIdCompaniesCompanyIdWorkordersGetFilterType0,
+)
 from ...models.pagination_work_orders_motor import PaginationWorkOrdersMotor
 from ...types import UNSET, Response, Unset
 
@@ -26,6 +29,11 @@ def _get_kwargs(
     ignore_sort: Union[None, Unset, str] = "true",
     deleted: Union[None, Unset, str] = UNSET,
     number: Union[None, Unset, str] = UNSET,
+    filter_: Union[
+        LoadWorkorderByCompanyIdCompaniesCompanyIdWorkordersGetFilterType0, None, Unset
+    ] = UNSET,
+    start_date: Union[None, Unset, str] = UNSET,
+    end_date: Union[None, Unset, str] = UNSET,
 ) -> dict[str, Any]:
     params: dict[str, Any] = {}
 
@@ -110,6 +118,29 @@ def _get_kwargs(
         json_number = number
     params["number"] = json_number
 
+    json_filter_: Union[None, Unset, str]
+    if isinstance(filter_, Unset):
+        json_filter_ = UNSET
+    elif isinstance(filter_, str):
+        json_filter_ = filter_
+    else:
+        json_filter_ = filter_
+    params["filter"] = json_filter_
+
+    json_start_date: Union[None, Unset, str]
+    if isinstance(start_date, Unset):
+        json_start_date = UNSET
+    else:
+        json_start_date = start_date
+    params["start_date"] = json_start_date
+
+    json_end_date: Union[None, Unset, str]
+    if isinstance(end_date, Unset):
+        json_end_date = UNSET
+    else:
+        json_end_date = end_date
+    params["end_date"] = json_end_date
+
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 
     _kwargs: dict[str, Any] = {
@@ -155,7 +186,7 @@ def _build_response(
 def sync_detailed(
     company_id: str,
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
     page: Union[Unset, int] = 1,
     limit: Union[Unset, int] = 10,
     status: Union[None, Unset, str] = UNSET,
@@ -169,6 +200,11 @@ def sync_detailed(
     ignore_sort: Union[None, Unset, str] = "true",
     deleted: Union[None, Unset, str] = UNSET,
     number: Union[None, Unset, str] = UNSET,
+    filter_: Union[
+        LoadWorkorderByCompanyIdCompaniesCompanyIdWorkordersGetFilterType0, None, Unset
+    ] = UNSET,
+    start_date: Union[None, Unset, str] = UNSET,
+    end_date: Union[None, Unset, str] = UNSET,
 ) -> Response[Union[Any, HTTPValidationError, PaginationWorkOrdersMotor]]:
     """List work orders by company ID
 
@@ -190,6 +226,10 @@ def sync_detailed(
         ignore_sort (Union[None, Unset, str]): Ignore sorting Default: 'true'.
         deleted (Union[None, Unset, str]): Filter deleted work orders
         number (Union[None, Unset, str]): Work order number
+        filter_ (Union[LoadWorkorderByCompanyIdCompaniesCompanyIdWorkordersGetFilterType0, None,
+            Unset]): Filter by creation or update date
+        start_date (Union[None, Unset, str]): Filter start date range
+        end_date (Union[None, Unset, str]): Filter end date range
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -214,6 +254,9 @@ def sync_detailed(
         ignore_sort=ignore_sort,
         deleted=deleted,
         number=number,
+        filter_=filter_,
+        start_date=start_date,
+        end_date=end_date,
     )
 
     response = client.get_httpx_client().request(
@@ -226,7 +269,7 @@ def sync_detailed(
 def sync(
     company_id: str,
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
     page: Union[Unset, int] = 1,
     limit: Union[Unset, int] = 10,
     status: Union[None, Unset, str] = UNSET,
@@ -240,6 +283,11 @@ def sync(
     ignore_sort: Union[None, Unset, str] = "true",
     deleted: Union[None, Unset, str] = UNSET,
     number: Union[None, Unset, str] = UNSET,
+    filter_: Union[
+        LoadWorkorderByCompanyIdCompaniesCompanyIdWorkordersGetFilterType0, None, Unset
+    ] = UNSET,
+    start_date: Union[None, Unset, str] = UNSET,
+    end_date: Union[None, Unset, str] = UNSET,
 ) -> Optional[Union[Any, HTTPValidationError, PaginationWorkOrdersMotor]]:
     """List work orders by company ID
 
@@ -261,6 +309,10 @@ def sync(
         ignore_sort (Union[None, Unset, str]): Ignore sorting Default: 'true'.
         deleted (Union[None, Unset, str]): Filter deleted work orders
         number (Union[None, Unset, str]): Work order number
+        filter_ (Union[LoadWorkorderByCompanyIdCompaniesCompanyIdWorkordersGetFilterType0, None,
+            Unset]): Filter by creation or update date
+        start_date (Union[None, Unset, str]): Filter start date range
+        end_date (Union[None, Unset, str]): Filter end date range
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -286,13 +338,16 @@ def sync(
         ignore_sort=ignore_sort,
         deleted=deleted,
         number=number,
+        filter_=filter_,
+        start_date=start_date,
+        end_date=end_date,
     ).parsed
 
 
 async def asyncio_detailed(
     company_id: str,
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
     page: Union[Unset, int] = 1,
     limit: Union[Unset, int] = 10,
     status: Union[None, Unset, str] = UNSET,
@@ -306,6 +361,11 @@ async def asyncio_detailed(
     ignore_sort: Union[None, Unset, str] = "true",
     deleted: Union[None, Unset, str] = UNSET,
     number: Union[None, Unset, str] = UNSET,
+    filter_: Union[
+        LoadWorkorderByCompanyIdCompaniesCompanyIdWorkordersGetFilterType0, None, Unset
+    ] = UNSET,
+    start_date: Union[None, Unset, str] = UNSET,
+    end_date: Union[None, Unset, str] = UNSET,
 ) -> Response[Union[Any, HTTPValidationError, PaginationWorkOrdersMotor]]:
     """List work orders by company ID
 
@@ -327,6 +387,10 @@ async def asyncio_detailed(
         ignore_sort (Union[None, Unset, str]): Ignore sorting Default: 'true'.
         deleted (Union[None, Unset, str]): Filter deleted work orders
         number (Union[None, Unset, str]): Work order number
+        filter_ (Union[LoadWorkorderByCompanyIdCompaniesCompanyIdWorkordersGetFilterType0, None,
+            Unset]): Filter by creation or update date
+        start_date (Union[None, Unset, str]): Filter start date range
+        end_date (Union[None, Unset, str]): Filter end date range
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -351,6 +415,9 @@ async def asyncio_detailed(
         ignore_sort=ignore_sort,
         deleted=deleted,
         number=number,
+        filter_=filter_,
+        start_date=start_date,
+        end_date=end_date,
     )
 
     response = await client.get_async_httpx_client().request(**kwargs)
@@ -361,7 +428,7 @@ async def asyncio_detailed(
 async def asyncio(
     company_id: str,
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
     page: Union[Unset, int] = 1,
     limit: Union[Unset, int] = 10,
     status: Union[None, Unset, str] = UNSET,
@@ -375,6 +442,11 @@ async def asyncio(
     ignore_sort: Union[None, Unset, str] = "true",
     deleted: Union[None, Unset, str] = UNSET,
     number: Union[None, Unset, str] = UNSET,
+    filter_: Union[
+        LoadWorkorderByCompanyIdCompaniesCompanyIdWorkordersGetFilterType0, None, Unset
+    ] = UNSET,
+    start_date: Union[None, Unset, str] = UNSET,
+    end_date: Union[None, Unset, str] = UNSET,
 ) -> Optional[Union[Any, HTTPValidationError, PaginationWorkOrdersMotor]]:
     """List work orders by company ID
 
@@ -396,6 +468,10 @@ async def asyncio(
         ignore_sort (Union[None, Unset, str]): Ignore sorting Default: 'true'.
         deleted (Union[None, Unset, str]): Filter deleted work orders
         number (Union[None, Unset, str]): Work order number
+        filter_ (Union[LoadWorkorderByCompanyIdCompaniesCompanyIdWorkordersGetFilterType0, None,
+            Unset]): Filter by creation or update date
+        start_date (Union[None, Unset, str]): Filter start date range
+        end_date (Union[None, Unset, str]): Filter end date range
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -422,5 +498,8 @@ async def asyncio(
             ignore_sort=ignore_sort,
             deleted=deleted,
             number=number,
+            filter_=filter_,
+            start_date=start_date,
+            end_date=end_date,
         )
     ).parsed

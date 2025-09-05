@@ -14,10 +14,8 @@ from ...types import Response
 def _get_kwargs(
     *,
     body: WorkOrdersMotorRequestAPI,
-    company_id: str,
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
-    headers["company-id"] = company_id
 
     _kwargs: dict[str, Any] = {
         "method": "post",
@@ -65,16 +63,14 @@ def _build_response(
 
 def sync_detailed(
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
     body: WorkOrdersMotorRequestAPI,
-    company_id: str,
 ) -> Response[Union[Any, HTTPValidationError, PaginationWorkOrdersMotor]]:
     """Create a work order
 
      This endpoint creates a new work order.
 
     Args:
-        company_id (str):
         body (WorkOrdersMotorRequestAPI):
 
     Raises:
@@ -87,7 +83,6 @@ def sync_detailed(
 
     kwargs = _get_kwargs(
         body=body,
-        company_id=company_id,
     )
 
     response = client.get_httpx_client().request(
@@ -99,16 +94,14 @@ def sync_detailed(
 
 def sync(
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
     body: WorkOrdersMotorRequestAPI,
-    company_id: str,
 ) -> Optional[Union[Any, HTTPValidationError, PaginationWorkOrdersMotor]]:
     """Create a work order
 
      This endpoint creates a new work order.
 
     Args:
-        company_id (str):
         body (WorkOrdersMotorRequestAPI):
 
     Raises:
@@ -122,22 +115,19 @@ def sync(
     return sync_detailed(
         client=client,
         body=body,
-        company_id=company_id,
     ).parsed
 
 
 async def asyncio_detailed(
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
     body: WorkOrdersMotorRequestAPI,
-    company_id: str,
 ) -> Response[Union[Any, HTTPValidationError, PaginationWorkOrdersMotor]]:
     """Create a work order
 
      This endpoint creates a new work order.
 
     Args:
-        company_id (str):
         body (WorkOrdersMotorRequestAPI):
 
     Raises:
@@ -150,7 +140,6 @@ async def asyncio_detailed(
 
     kwargs = _get_kwargs(
         body=body,
-        company_id=company_id,
     )
 
     response = await client.get_async_httpx_client().request(**kwargs)
@@ -160,16 +149,14 @@ async def asyncio_detailed(
 
 async def asyncio(
     *,
-    client: AuthenticatedClient,
+    client: Union[AuthenticatedClient, Client],
     body: WorkOrdersMotorRequestAPI,
-    company_id: str,
 ) -> Optional[Union[Any, HTTPValidationError, PaginationWorkOrdersMotor]]:
     """Create a work order
 
      This endpoint creates a new work order.
 
     Args:
-        company_id (str):
         body (WorkOrdersMotorRequestAPI):
 
     Raises:
@@ -184,6 +171,5 @@ async def asyncio(
         await asyncio_detailed(
             client=client,
             body=body,
-            company_id=company_id,
         )
     ).parsed
