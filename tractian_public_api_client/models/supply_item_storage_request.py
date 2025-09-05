@@ -4,6 +4,8 @@ from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
+from ..types import UNSET, Unset
+
 if TYPE_CHECKING:
     from ..models.supply_item_storage_inbound_batch_request import (
         SupplyItemStorageInboundBatchRequest,
@@ -24,7 +26,9 @@ class SupplyItemStorageRequest:
     min_storage: Union[None, float]
     supply_point: Union[None, float]
     storage_positions: list["SupplyItemStoragePositionRequest"]
-    new_inbound_batch: Union["SupplyItemStorageInboundBatchRequest", None]
+    new_inbound_batch: Union["SupplyItemStorageInboundBatchRequest", None, Unset] = (
+        UNSET
+    )
     """ Required when item storage position quantity is not 0 """
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
@@ -51,8 +55,10 @@ class SupplyItemStorageRequest:
             storage_positions_item = storage_positions_item_data.to_dict()
             storage_positions.append(storage_positions_item)
 
-        new_inbound_batch: Union[None, dict[str, Any]]
-        if isinstance(self.new_inbound_batch, SupplyItemStorageInboundBatchRequest):
+        new_inbound_batch: Union[None, Unset, dict[str, Any]]
+        if isinstance(self.new_inbound_batch, Unset):
+            new_inbound_batch = UNSET
+        elif isinstance(self.new_inbound_batch, SupplyItemStorageInboundBatchRequest):
             new_inbound_batch = self.new_inbound_batch.to_dict()
         else:
             new_inbound_batch = self.new_inbound_batch
@@ -67,9 +73,10 @@ class SupplyItemStorageRequest:
                 "minStorage": min_storage,
                 "supplyPoint": supply_point,
                 "storagePositions": storage_positions,
-                "newInboundBatch": new_inbound_batch,
             }
         )
+        if new_inbound_batch is not UNSET:
+            field_dict["newInboundBatch"] = new_inbound_batch
 
         return field_dict
 
@@ -119,8 +126,10 @@ class SupplyItemStorageRequest:
 
         def _parse_new_inbound_batch(
             data: object,
-        ) -> Union["SupplyItemStorageInboundBatchRequest", None]:
+        ) -> Union["SupplyItemStorageInboundBatchRequest", None, Unset]:
             if data is None:
+                return data
+            if isinstance(data, Unset):
                 return data
             try:
                 if not isinstance(data, dict):
@@ -132,9 +141,11 @@ class SupplyItemStorageRequest:
                 return new_inbound_batch_type_0
             except:  # noqa: E722
                 pass
-            return cast(Union["SupplyItemStorageInboundBatchRequest", None], data)
+            return cast(
+                Union["SupplyItemStorageInboundBatchRequest", None, Unset], data
+            )
 
-        new_inbound_batch = _parse_new_inbound_batch(d.pop("newInboundBatch"))
+        new_inbound_batch = _parse_new_inbound_batch(d.pop("newInboundBatch", UNSET))
 
         supply_item_storage_request = cls(
             company_id=company_id,

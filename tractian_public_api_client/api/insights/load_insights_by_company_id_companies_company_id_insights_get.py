@@ -22,6 +22,7 @@ def _get_kwargs(
     deleted: Union[Unset, bool] = False,
     load_prescription: Union[Unset, bool] = False,
     load_description: Union[Unset, bool] = False,
+    sort: Union[Unset, str] = "createdAtDesc",
 ) -> dict[str, Any]:
     params: dict[str, Any] = {}
 
@@ -43,6 +44,8 @@ def _get_kwargs(
     params["loadPrescription"] = load_prescription
 
     params["loadDescription"] = load_description
+
+    params["sort"] = sort
 
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 
@@ -97,6 +100,7 @@ def sync_detailed(
     deleted: Union[Unset, bool] = False,
     load_prescription: Union[Unset, bool] = False,
     load_description: Union[Unset, bool] = False,
+    sort: Union[Unset, str] = "createdAtDesc",
 ) -> Response[Union[Any, HTTPValidationError, PaginationApiListInsightsResponse]]:
     """List insights by company ID
 
@@ -117,6 +121,8 @@ def sync_detailed(
             prescriptions Default: False.
         load_description (Union[Unset, bool]): Filter if insights will return description Default:
             False.
+        sort (Union[Unset, str]): Sort insights by createdAtAsc or createdAtDesc Default:
+            'createdAtDesc'.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -135,6 +141,7 @@ def sync_detailed(
         deleted=deleted,
         load_prescription=load_prescription,
         load_description=load_description,
+        sort=sort,
     )
 
     response = client.get_httpx_client().request(
@@ -155,6 +162,7 @@ def sync(
     deleted: Union[Unset, bool] = False,
     load_prescription: Union[Unset, bool] = False,
     load_description: Union[Unset, bool] = False,
+    sort: Union[Unset, str] = "createdAtDesc",
 ) -> Optional[Union[Any, HTTPValidationError, PaginationApiListInsightsResponse]]:
     """List insights by company ID
 
@@ -175,6 +183,8 @@ def sync(
             prescriptions Default: False.
         load_description (Union[Unset, bool]): Filter if insights will return description Default:
             False.
+        sort (Union[Unset, str]): Sort insights by createdAtAsc or createdAtDesc Default:
+            'createdAtDesc'.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -194,6 +204,7 @@ def sync(
         deleted=deleted,
         load_prescription=load_prescription,
         load_description=load_description,
+        sort=sort,
     ).parsed
 
 
@@ -208,6 +219,7 @@ async def asyncio_detailed(
     deleted: Union[Unset, bool] = False,
     load_prescription: Union[Unset, bool] = False,
     load_description: Union[Unset, bool] = False,
+    sort: Union[Unset, str] = "createdAtDesc",
 ) -> Response[Union[Any, HTTPValidationError, PaginationApiListInsightsResponse]]:
     """List insights by company ID
 
@@ -228,6 +240,8 @@ async def asyncio_detailed(
             prescriptions Default: False.
         load_description (Union[Unset, bool]): Filter if insights will return description Default:
             False.
+        sort (Union[Unset, str]): Sort insights by createdAtAsc or createdAtDesc Default:
+            'createdAtDesc'.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -246,6 +260,7 @@ async def asyncio_detailed(
         deleted=deleted,
         load_prescription=load_prescription,
         load_description=load_description,
+        sort=sort,
     )
 
     response = await client.get_async_httpx_client().request(**kwargs)
@@ -264,6 +279,7 @@ async def asyncio(
     deleted: Union[Unset, bool] = False,
     load_prescription: Union[Unset, bool] = False,
     load_description: Union[Unset, bool] = False,
+    sort: Union[Unset, str] = "createdAtDesc",
 ) -> Optional[Union[Any, HTTPValidationError, PaginationApiListInsightsResponse]]:
     """List insights by company ID
 
@@ -284,6 +300,8 @@ async def asyncio(
             prescriptions Default: False.
         load_description (Union[Unset, bool]): Filter if insights will return description Default:
             False.
+        sort (Union[Unset, str]): Sort insights by createdAtAsc or createdAtDesc Default:
+            'createdAtDesc'.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -304,5 +322,6 @@ async def asyncio(
             deleted=deleted,
             load_prescription=load_prescription,
             load_description=load_description,
+            sort=sort,
         )
     ).parsed

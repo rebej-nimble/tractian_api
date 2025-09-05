@@ -7,6 +7,8 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
+    from ..models.api_supply_attachment import ApiSupplyAttachment
+    from ..models.api_supply_image import ApiSupplyImage
     from ..models.api_supply_storage_location_code_response import (
         ApiSupplyStorageLocationCodeResponse,
     )
@@ -67,9 +69,13 @@ class ApiSupplyStorageLocationResponse:
     """ Whether the storage location has addressing """
     has_stored_items: Union[None, Unset, bool] = UNSET
     """ Whether the storage location has stored items """
+    image: Union["ApiSupplyImage", None, Unset] = UNSET
+    attachments: Union[None, Unset, list["ApiSupplyAttachment"]] = UNSET
+    """ The attachments of the storage location """
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
+        from ..models.api_supply_image import ApiSupplyImage
         from ..models.api_supply_storage_location_code_response import (
             ApiSupplyStorageLocationCodeResponse,
         )
@@ -218,6 +224,26 @@ class ApiSupplyStorageLocationResponse:
         else:
             has_stored_items = self.has_stored_items
 
+        image: Union[None, Unset, dict[str, Any]]
+        if isinstance(self.image, Unset):
+            image = UNSET
+        elif isinstance(self.image, ApiSupplyImage):
+            image = self.image.to_dict()
+        else:
+            image = self.image
+
+        attachments: Union[None, Unset, list[dict[str, Any]]]
+        if isinstance(self.attachments, Unset):
+            attachments = UNSET
+        elif isinstance(self.attachments, list):
+            attachments = []
+            for attachments_type_0_item_data in self.attachments:
+                attachments_type_0_item = attachments_type_0_item_data.to_dict()
+                attachments.append(attachments_type_0_item)
+
+        else:
+            attachments = self.attachments
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update(
@@ -265,11 +291,17 @@ class ApiSupplyStorageLocationResponse:
             field_dict["hasAddressing"] = has_addressing
         if has_stored_items is not UNSET:
             field_dict["hasStoredItems"] = has_stored_items
+        if image is not UNSET:
+            field_dict["image"] = image
+        if attachments is not UNSET:
+            field_dict["attachments"] = attachments
 
         return field_dict
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        from ..models.api_supply_attachment import ApiSupplyAttachment
+        from ..models.api_supply_image import ApiSupplyImage
         from ..models.api_supply_storage_location_code_response import (
             ApiSupplyStorageLocationCodeResponse,
         )
@@ -522,6 +554,49 @@ class ApiSupplyStorageLocationResponse:
 
         has_stored_items = _parse_has_stored_items(d.pop("hasStoredItems", UNSET))
 
+        def _parse_image(data: object) -> Union["ApiSupplyImage", None, Unset]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                image_type_0 = ApiSupplyImage.from_dict(data)
+
+                return image_type_0
+            except:  # noqa: E722
+                pass
+            return cast(Union["ApiSupplyImage", None, Unset], data)
+
+        image = _parse_image(d.pop("image", UNSET))
+
+        def _parse_attachments(
+            data: object,
+        ) -> Union[None, Unset, list["ApiSupplyAttachment"]]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, list):
+                    raise TypeError()
+                attachments_type_0 = []
+                _attachments_type_0 = data
+                for attachments_type_0_item_data in _attachments_type_0:
+                    attachments_type_0_item = ApiSupplyAttachment.from_dict(
+                        attachments_type_0_item_data
+                    )
+
+                    attachments_type_0.append(attachments_type_0_item)
+
+                return attachments_type_0
+            except:  # noqa: E722
+                pass
+            return cast(Union[None, Unset, list["ApiSupplyAttachment"]], data)
+
+        attachments = _parse_attachments(d.pop("attachments", UNSET))
+
         api_supply_storage_location_response = cls(
             id=id,
             company_id=company_id,
@@ -545,6 +620,8 @@ class ApiSupplyStorageLocationResponse:
             attachment_ids=attachment_ids,
             has_addressing=has_addressing,
             has_stored_items=has_stored_items,
+            image=image,
+            attachments=attachments,
         )
 
         api_supply_storage_location_response.additional_properties = d

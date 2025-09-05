@@ -24,10 +24,6 @@ T = TypeVar("T", bound="ApiSupplyInventoryAdjustmentRequest")
 
 @_attrs_define
 class ApiSupplyInventoryAdjustmentRequest:
-    created_at: str
-    updated_at: str
-    created_by_user_id: str
-    updated_by_user_id: str
     item_id: str
     item_storage_id: str
     quantity: float
@@ -35,21 +31,19 @@ class ApiSupplyInventoryAdjustmentRequest:
     cost_center_id: str
     type_: InventoryAdjustmentTypeEnum
     inventory_adjustment_positions: list["InventoryAdjustmentPositionSupplyRequest"]
-    inbound_batches: list["InventoryAdjustmentsInboundBatchSupplyRequest"]
+    created_at: Union[None, Unset, str] = UNSET
+    updated_at: Union[None, Unset, str] = UNSET
     new_inbound_batch: Union["NewInboundBatchSupplyRequest", None, Unset] = UNSET
+    """ Required when type is entry and inbound batches are not provided """
+    inbound_batches: Union[
+        None, Unset, list["InventoryAdjustmentsInboundBatchSupplyRequest"]
+    ] = UNSET
+    """ Required when type is withdrawn """
 
     def to_dict(self) -> dict[str, Any]:
         from ..models.new_inbound_batch_supply_request import (
             NewInboundBatchSupplyRequest,
         )
-
-        created_at = self.created_at
-
-        updated_at = self.updated_at
-
-        created_by_user_id = self.created_by_user_id
-
-        updated_by_user_id = self.updated_by_user_id
 
         item_id = self.item_id
 
@@ -72,10 +66,17 @@ class ApiSupplyInventoryAdjustmentRequest:
             )
             inventory_adjustment_positions.append(inventory_adjustment_positions_item)
 
-        inbound_batches = []
-        for inbound_batches_item_data in self.inbound_batches:
-            inbound_batches_item = inbound_batches_item_data.to_dict()
-            inbound_batches.append(inbound_batches_item)
+        created_at: Union[None, Unset, str]
+        if isinstance(self.created_at, Unset):
+            created_at = UNSET
+        else:
+            created_at = self.created_at
+
+        updated_at: Union[None, Unset, str]
+        if isinstance(self.updated_at, Unset):
+            updated_at = UNSET
+        else:
+            updated_at = self.updated_at
 
         new_inbound_batch: Union[None, Unset, dict[str, Any]]
         if isinstance(self.new_inbound_batch, Unset):
@@ -85,14 +86,22 @@ class ApiSupplyInventoryAdjustmentRequest:
         else:
             new_inbound_batch = self.new_inbound_batch
 
+        inbound_batches: Union[None, Unset, list[dict[str, Any]]]
+        if isinstance(self.inbound_batches, Unset):
+            inbound_batches = UNSET
+        elif isinstance(self.inbound_batches, list):
+            inbound_batches = []
+            for inbound_batches_type_0_item_data in self.inbound_batches:
+                inbound_batches_type_0_item = inbound_batches_type_0_item_data.to_dict()
+                inbound_batches.append(inbound_batches_type_0_item)
+
+        else:
+            inbound_batches = self.inbound_batches
+
         field_dict: dict[str, Any] = {}
 
         field_dict.update(
             {
-                "createdAt": created_at,
-                "updatedAt": updated_at,
-                "createdByUserId": created_by_user_id,
-                "updatedByUserId": updated_by_user_id,
                 "itemId": item_id,
                 "itemStorageId": item_storage_id,
                 "quantity": quantity,
@@ -100,11 +109,16 @@ class ApiSupplyInventoryAdjustmentRequest:
                 "costCenterId": cost_center_id,
                 "type": type_,
                 "inventoryAdjustmentPositions": inventory_adjustment_positions,
-                "inboundBatches": inbound_batches,
             }
         )
+        if created_at is not UNSET:
+            field_dict["createdAt"] = created_at
+        if updated_at is not UNSET:
+            field_dict["updatedAt"] = updated_at
         if new_inbound_batch is not UNSET:
             field_dict["newInboundBatch"] = new_inbound_batch
+        if inbound_batches is not UNSET:
+            field_dict["inboundBatches"] = inbound_batches
 
         return field_dict
 
@@ -121,14 +135,6 @@ class ApiSupplyInventoryAdjustmentRequest:
         )
 
         d = dict(src_dict)
-        created_at = d.pop("createdAt")
-
-        updated_at = d.pop("updatedAt")
-
-        created_by_user_id = d.pop("createdByUserId")
-
-        updated_by_user_id = d.pop("updatedByUserId")
-
         item_id = d.pop("itemId")
 
         item_storage_id = d.pop("itemStorageId")
@@ -152,16 +158,23 @@ class ApiSupplyInventoryAdjustmentRequest:
 
             inventory_adjustment_positions.append(inventory_adjustment_positions_item)
 
-        inbound_batches = []
-        _inbound_batches = d.pop("inboundBatches")
-        for inbound_batches_item_data in _inbound_batches:
-            inbound_batches_item = (
-                InventoryAdjustmentsInboundBatchSupplyRequest.from_dict(
-                    inbound_batches_item_data
-                )
-            )
+        def _parse_created_at(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
 
-            inbound_batches.append(inbound_batches_item)
+        created_at = _parse_created_at(d.pop("createdAt", UNSET))
+
+        def _parse_updated_at(data: object) -> Union[None, Unset, str]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(Union[None, Unset, str], data)
+
+        updated_at = _parse_updated_at(d.pop("updatedAt", UNSET))
 
         def _parse_new_inbound_batch(
             data: object,
@@ -182,11 +195,40 @@ class ApiSupplyInventoryAdjustmentRequest:
 
         new_inbound_batch = _parse_new_inbound_batch(d.pop("newInboundBatch", UNSET))
 
+        def _parse_inbound_batches(
+            data: object,
+        ) -> Union[None, Unset, list["InventoryAdjustmentsInboundBatchSupplyRequest"]]:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, list):
+                    raise TypeError()
+                inbound_batches_type_0 = []
+                _inbound_batches_type_0 = data
+                for inbound_batches_type_0_item_data in _inbound_batches_type_0:
+                    inbound_batches_type_0_item = (
+                        InventoryAdjustmentsInboundBatchSupplyRequest.from_dict(
+                            inbound_batches_type_0_item_data
+                        )
+                    )
+
+                    inbound_batches_type_0.append(inbound_batches_type_0_item)
+
+                return inbound_batches_type_0
+            except:  # noqa: E722
+                pass
+            return cast(
+                Union[
+                    None, Unset, list["InventoryAdjustmentsInboundBatchSupplyRequest"]
+                ],
+                data,
+            )
+
+        inbound_batches = _parse_inbound_batches(d.pop("inboundBatches", UNSET))
+
         api_supply_inventory_adjustment_request = cls(
-            created_at=created_at,
-            updated_at=updated_at,
-            created_by_user_id=created_by_user_id,
-            updated_by_user_id=updated_by_user_id,
             item_id=item_id,
             item_storage_id=item_storage_id,
             quantity=quantity,
@@ -194,8 +236,10 @@ class ApiSupplyInventoryAdjustmentRequest:
             cost_center_id=cost_center_id,
             type_=type_,
             inventory_adjustment_positions=inventory_adjustment_positions,
-            inbound_batches=inbound_batches,
+            created_at=created_at,
+            updated_at=updated_at,
             new_inbound_batch=new_inbound_batch,
+            inbound_batches=inbound_batches,
         )
 
         return api_supply_inventory_adjustment_request

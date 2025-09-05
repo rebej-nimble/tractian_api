@@ -5,11 +5,11 @@ import httpx
 
 from ... import errors
 from ...client import AuthenticatedClient, Client
-from ...models.api_supply_inventory_adjustment_request import (
-    ApiSupplyInventoryAdjustmentRequest,
+from ...models.api_supply_storage_location_request import (
+    ApiSupplyStorageLocationRequest,
 )
-from ...models.api_supply_inventory_adjustment_response import (
-    ApiSupplyInventoryAdjustmentResponse,
+from ...models.api_supply_storage_location_response import (
+    ApiSupplyStorageLocationResponse,
 )
 from ...models.http_validation_error import HTTPValidationError
 from ...types import Response
@@ -17,13 +17,13 @@ from ...types import Response
 
 def _get_kwargs(
     *,
-    body: ApiSupplyInventoryAdjustmentRequest,
+    body: ApiSupplyStorageLocationRequest,
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
 
     _kwargs: dict[str, Any] = {
         "method": "post",
-        "url": "/supply/inventory-adjustment",
+        "url": "/supply/storage-location",
     }
 
     _kwargs["json"] = body.to_dict()
@@ -36,9 +36,9 @@ def _get_kwargs(
 
 def _parse_response(
     *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[Union[Any, ApiSupplyInventoryAdjustmentResponse, HTTPValidationError]]:
+) -> Optional[Union[Any, ApiSupplyStorageLocationResponse, HTTPValidationError]]:
     if response.status_code == 200:
-        response_200 = ApiSupplyInventoryAdjustmentResponse.from_dict(response.json())
+        response_200 = ApiSupplyStorageLocationResponse.from_dict(response.json())
 
         return response_200
     if response.status_code == 201:
@@ -56,7 +56,7 @@ def _parse_response(
 
 def _build_response(
     *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Response[Union[Any, ApiSupplyInventoryAdjustmentResponse, HTTPValidationError]]:
+) -> Response[Union[Any, ApiSupplyStorageLocationResponse, HTTPValidationError]]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -68,21 +68,21 @@ def _build_response(
 def sync_detailed(
     *,
     client: Union[AuthenticatedClient, Client],
-    body: ApiSupplyInventoryAdjustmentRequest,
-) -> Response[Union[Any, ApiSupplyInventoryAdjustmentResponse, HTTPValidationError]]:
-    """Create Inventory Adjustment
+    body: ApiSupplyStorageLocationRequest,
+) -> Response[Union[Any, ApiSupplyStorageLocationResponse, HTTPValidationError]]:
+    """Create Storage Location
 
-     Create a inventory adjustment.
+     Create a storage location
 
     Args:
-        body (ApiSupplyInventoryAdjustmentRequest):
+        body (ApiSupplyStorageLocationRequest):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[Any, ApiSupplyInventoryAdjustmentResponse, HTTPValidationError]]
+        Response[Union[Any, ApiSupplyStorageLocationResponse, HTTPValidationError]]
     """
 
     kwargs = _get_kwargs(
@@ -99,21 +99,21 @@ def sync_detailed(
 def sync(
     *,
     client: Union[AuthenticatedClient, Client],
-    body: ApiSupplyInventoryAdjustmentRequest,
-) -> Optional[Union[Any, ApiSupplyInventoryAdjustmentResponse, HTTPValidationError]]:
-    """Create Inventory Adjustment
+    body: ApiSupplyStorageLocationRequest,
+) -> Optional[Union[Any, ApiSupplyStorageLocationResponse, HTTPValidationError]]:
+    """Create Storage Location
 
-     Create a inventory adjustment.
+     Create a storage location
 
     Args:
-        body (ApiSupplyInventoryAdjustmentRequest):
+        body (ApiSupplyStorageLocationRequest):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[Any, ApiSupplyInventoryAdjustmentResponse, HTTPValidationError]
+        Union[Any, ApiSupplyStorageLocationResponse, HTTPValidationError]
     """
 
     return sync_detailed(
@@ -125,21 +125,21 @@ def sync(
 async def asyncio_detailed(
     *,
     client: Union[AuthenticatedClient, Client],
-    body: ApiSupplyInventoryAdjustmentRequest,
-) -> Response[Union[Any, ApiSupplyInventoryAdjustmentResponse, HTTPValidationError]]:
-    """Create Inventory Adjustment
+    body: ApiSupplyStorageLocationRequest,
+) -> Response[Union[Any, ApiSupplyStorageLocationResponse, HTTPValidationError]]:
+    """Create Storage Location
 
-     Create a inventory adjustment.
+     Create a storage location
 
     Args:
-        body (ApiSupplyInventoryAdjustmentRequest):
+        body (ApiSupplyStorageLocationRequest):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[Any, ApiSupplyInventoryAdjustmentResponse, HTTPValidationError]]
+        Response[Union[Any, ApiSupplyStorageLocationResponse, HTTPValidationError]]
     """
 
     kwargs = _get_kwargs(
@@ -154,21 +154,21 @@ async def asyncio_detailed(
 async def asyncio(
     *,
     client: Union[AuthenticatedClient, Client],
-    body: ApiSupplyInventoryAdjustmentRequest,
-) -> Optional[Union[Any, ApiSupplyInventoryAdjustmentResponse, HTTPValidationError]]:
-    """Create Inventory Adjustment
+    body: ApiSupplyStorageLocationRequest,
+) -> Optional[Union[Any, ApiSupplyStorageLocationResponse, HTTPValidationError]]:
+    """Create Storage Location
 
-     Create a inventory adjustment.
+     Create a storage location
 
     Args:
-        body (ApiSupplyInventoryAdjustmentRequest):
+        body (ApiSupplyStorageLocationRequest):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[Any, ApiSupplyInventoryAdjustmentResponse, HTTPValidationError]
+        Union[Any, ApiSupplyStorageLocationResponse, HTTPValidationError]
     """
 
     return (

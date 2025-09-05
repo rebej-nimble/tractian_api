@@ -19,6 +19,7 @@ def _get_kwargs(
     limit: Union[Unset, int] = 10,
     status: Union[None, Unset, str] = UNSET,
     load_custom_fields: Union[None, Unset, str] = "true",
+    load_created_by_system: Union[None, Unset, bool] = UNSET,
 ) -> dict[str, Any]:
     params: dict[str, Any] = {}
 
@@ -39,6 +40,13 @@ def _get_kwargs(
     else:
         json_load_custom_fields = load_custom_fields
     params["loadCustomFields"] = json_load_custom_fields
+
+    json_load_created_by_system: Union[None, Unset, bool]
+    if isinstance(load_created_by_system, Unset):
+        json_load_created_by_system = UNSET
+    else:
+        json_load_created_by_system = load_created_by_system
+    params["loadCreatedBySystem"] = json_load_created_by_system
 
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 
@@ -93,6 +101,7 @@ def sync_detailed(
     limit: Union[Unset, int] = 10,
     status: Union[None, Unset, str] = UNSET,
     load_custom_fields: Union[None, Unset, str] = "true",
+    load_created_by_system: Union[None, Unset, bool] = UNSET,
 ) -> Response[
     Union[HTTPValidationError, PaginationApiSupplyPurchaseRequisitionResponse]
 ]:
@@ -107,6 +116,8 @@ def sync_detailed(
         status (Union[None, Unset, str]): Filter for loading purchase requisition by status.
         load_custom_fields (Union[None, Unset, str]): Filter for loading custom fields. Default:
             'true'.
+        load_created_by_system (Union[None, Unset, bool]): Filter for loading created
+            automatically by system.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -122,6 +133,7 @@ def sync_detailed(
         limit=limit,
         status=status,
         load_custom_fields=load_custom_fields,
+        load_created_by_system=load_created_by_system,
     )
 
     response = client.get_httpx_client().request(
@@ -139,6 +151,7 @@ def sync(
     limit: Union[Unset, int] = 10,
     status: Union[None, Unset, str] = UNSET,
     load_custom_fields: Union[None, Unset, str] = "true",
+    load_created_by_system: Union[None, Unset, bool] = UNSET,
 ) -> Optional[
     Union[HTTPValidationError, PaginationApiSupplyPurchaseRequisitionResponse]
 ]:
@@ -153,6 +166,8 @@ def sync(
         status (Union[None, Unset, str]): Filter for loading purchase requisition by status.
         load_custom_fields (Union[None, Unset, str]): Filter for loading custom fields. Default:
             'true'.
+        load_created_by_system (Union[None, Unset, bool]): Filter for loading created
+            automatically by system.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -169,6 +184,7 @@ def sync(
         limit=limit,
         status=status,
         load_custom_fields=load_custom_fields,
+        load_created_by_system=load_created_by_system,
     ).parsed
 
 
@@ -180,6 +196,7 @@ async def asyncio_detailed(
     limit: Union[Unset, int] = 10,
     status: Union[None, Unset, str] = UNSET,
     load_custom_fields: Union[None, Unset, str] = "true",
+    load_created_by_system: Union[None, Unset, bool] = UNSET,
 ) -> Response[
     Union[HTTPValidationError, PaginationApiSupplyPurchaseRequisitionResponse]
 ]:
@@ -194,6 +211,8 @@ async def asyncio_detailed(
         status (Union[None, Unset, str]): Filter for loading purchase requisition by status.
         load_custom_fields (Union[None, Unset, str]): Filter for loading custom fields. Default:
             'true'.
+        load_created_by_system (Union[None, Unset, bool]): Filter for loading created
+            automatically by system.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -209,6 +228,7 @@ async def asyncio_detailed(
         limit=limit,
         status=status,
         load_custom_fields=load_custom_fields,
+        load_created_by_system=load_created_by_system,
     )
 
     response = await client.get_async_httpx_client().request(**kwargs)
@@ -224,6 +244,7 @@ async def asyncio(
     limit: Union[Unset, int] = 10,
     status: Union[None, Unset, str] = UNSET,
     load_custom_fields: Union[None, Unset, str] = "true",
+    load_created_by_system: Union[None, Unset, bool] = UNSET,
 ) -> Optional[
     Union[HTTPValidationError, PaginationApiSupplyPurchaseRequisitionResponse]
 ]:
@@ -238,6 +259,8 @@ async def asyncio(
         status (Union[None, Unset, str]): Filter for loading purchase requisition by status.
         load_custom_fields (Union[None, Unset, str]): Filter for loading custom fields. Default:
             'true'.
+        load_created_by_system (Union[None, Unset, bool]): Filter for loading created
+            automatically by system.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -255,5 +278,6 @@ async def asyncio(
             limit=limit,
             status=status,
             load_custom_fields=load_custom_fields,
+            load_created_by_system=load_created_by_system,
         )
     ).parsed
