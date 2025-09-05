@@ -6,7 +6,9 @@ import httpx
 from ... import errors
 from ...client import AuthenticatedClient, Client
 from ...models.http_validation_error import HTTPValidationError
-from ...models.item_reservation_status_enum import ItemReservationStatusEnum
+from ...models.item_reservation_status_enum_supply import (
+    ItemReservationStatusEnumSupply,
+)
 from ...types import UNSET, Response, Unset
 
 
@@ -15,7 +17,7 @@ def _get_kwargs(
     *,
     page: Union[Unset, int] = 1,
     limit: Union[Unset, int] = 10,
-    status: Union[ItemReservationStatusEnum, None, Unset] = UNSET,
+    status: Union[ItemReservationStatusEnumSupply, None, Unset] = UNSET,
 ) -> dict[str, Any]:
     params: dict[str, Any] = {}
 
@@ -76,7 +78,7 @@ def sync_detailed(
     client: Union[AuthenticatedClient, Client],
     page: Union[Unset, int] = 1,
     limit: Union[Unset, int] = 10,
-    status: Union[ItemReservationStatusEnum, None, Unset] = UNSET,
+    status: Union[ItemReservationStatusEnumSupply, None, Unset] = UNSET,
 ) -> Response[Union[Any, HTTPValidationError]]:
     """Load Work Order Item By Company Id
 
@@ -84,8 +86,8 @@ def sync_detailed(
         company_id (str):
         page (Union[Unset, int]): Page number Default: 1.
         limit (Union[Unset, int]): Limit Default: 10.
-        status (Union[ItemReservationStatusEnum, None, Unset]): Filter for loading work order item
-            by status.
+        status (Union[ItemReservationStatusEnumSupply, None, Unset]): Filter for loading work
+            order item by status.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -115,7 +117,7 @@ def sync(
     client: Union[AuthenticatedClient, Client],
     page: Union[Unset, int] = 1,
     limit: Union[Unset, int] = 10,
-    status: Union[ItemReservationStatusEnum, None, Unset] = UNSET,
+    status: Union[ItemReservationStatusEnumSupply, None, Unset] = UNSET,
 ) -> Optional[Union[Any, HTTPValidationError]]:
     """Load Work Order Item By Company Id
 
@@ -123,8 +125,8 @@ def sync(
         company_id (str):
         page (Union[Unset, int]): Page number Default: 1.
         limit (Union[Unset, int]): Limit Default: 10.
-        status (Union[ItemReservationStatusEnum, None, Unset]): Filter for loading work order item
-            by status.
+        status (Union[ItemReservationStatusEnumSupply, None, Unset]): Filter for loading work
+            order item by status.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -149,7 +151,7 @@ async def asyncio_detailed(
     client: Union[AuthenticatedClient, Client],
     page: Union[Unset, int] = 1,
     limit: Union[Unset, int] = 10,
-    status: Union[ItemReservationStatusEnum, None, Unset] = UNSET,
+    status: Union[ItemReservationStatusEnumSupply, None, Unset] = UNSET,
 ) -> Response[Union[Any, HTTPValidationError]]:
     """Load Work Order Item By Company Id
 
@@ -157,8 +159,8 @@ async def asyncio_detailed(
         company_id (str):
         page (Union[Unset, int]): Page number Default: 1.
         limit (Union[Unset, int]): Limit Default: 10.
-        status (Union[ItemReservationStatusEnum, None, Unset]): Filter for loading work order item
-            by status.
+        status (Union[ItemReservationStatusEnumSupply, None, Unset]): Filter for loading work
+            order item by status.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -186,7 +188,7 @@ async def asyncio(
     client: Union[AuthenticatedClient, Client],
     page: Union[Unset, int] = 1,
     limit: Union[Unset, int] = 10,
-    status: Union[ItemReservationStatusEnum, None, Unset] = UNSET,
+    status: Union[ItemReservationStatusEnumSupply, None, Unset] = UNSET,
 ) -> Optional[Union[Any, HTTPValidationError]]:
     """Load Work Order Item By Company Id
 
@@ -194,8 +196,8 @@ async def asyncio(
         company_id (str):
         page (Union[Unset, int]): Page number Default: 1.
         limit (Union[Unset, int]): Limit Default: 10.
-        status (Union[ItemReservationStatusEnum, None, Unset]): Filter for loading work order item
-            by status.
+        status (Union[ItemReservationStatusEnumSupply, None, Unset]): Filter for loading work
+            order item by status.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.

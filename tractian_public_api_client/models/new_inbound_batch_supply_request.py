@@ -11,6 +11,7 @@ class NewInboundBatchSupplyRequest:
     unit_price: float
     entry_date: str
     name: str
+    identifier_code: str
 
     def to_dict(self) -> dict[str, Any]:
         unit_price = self.unit_price
@@ -19,6 +20,8 @@ class NewInboundBatchSupplyRequest:
 
         name = self.name
 
+        identifier_code = self.identifier_code
+
         field_dict: dict[str, Any] = {}
 
         field_dict.update(
@@ -26,6 +29,7 @@ class NewInboundBatchSupplyRequest:
                 "unitPrice": unit_price,
                 "entryDate": entry_date,
                 "name": name,
+                "identifierCode": identifier_code,
             }
         )
 
@@ -40,10 +44,13 @@ class NewInboundBatchSupplyRequest:
 
         name = d.pop("name")
 
+        identifier_code = d.pop("identifierCode")
+
         new_inbound_batch_supply_request = cls(
             unit_price=unit_price,
             entry_date=entry_date,
             name=name,
+            identifier_code=identifier_code,
         )
 
         return new_inbound_batch_supply_request

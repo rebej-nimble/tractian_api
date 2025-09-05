@@ -21,7 +21,7 @@ class ApiSupplyItemCategoryRequest:
     """ The id of the company """
     type_: Union[ItemCategoryTypeEnum, None, Unset] = UNSET
     """ The type of the item category """
-    color: Union[None, Unset, str] = "#972D35"
+    color: Union[None, Unset, str] = "#7EBC4E"
     """ The color of the item category. if not provided, a random color will be generated """
     description: Union[None, Unset, str] = UNSET
     """ The description of the item category """
